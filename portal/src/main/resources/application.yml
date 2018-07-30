@@ -1,12 +1,6 @@
 server:
   port: 8502
 
-db:
-  host: localhost
-  port: 3306
-  username: root
-  password: 123456
-
 mq:
   host: localhost
   port: 5672
