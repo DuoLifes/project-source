@@ -1,0 +1,61 @@
+server:
+  port: 8501
+
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+
+mq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+  virtual-host: ddmp
+
+myProps:
+  session-number: 30 # 取一段时间内销售会话数，当前时间为2018-02-28 11:05:22 设定值为30(单位/分钟)取2018-02-28 10:35:22内销售的会话数
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${db.host}:${db.port}/ddmp_basic?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${db.username}
+    password: ${db.password}
+    hikari:
+      pool-name: ddmp-basic
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+
+
+  rabbitmq:
+    host: ${mq.host}
+    port: ${mq.port}
+    username: ${mq.username}
+    password: ${mq.password}
+    virtual-host: ${mq.virtual-host}
+
+
+  cloud:
+    stream:
+      bindings:
+        PROJECT_BasicData_Send:
+          destination: PROJECT_BasicData_Queues
+
+        PROJECT_BasicData_Recv:
+          destination: PROJECT_BasicData_Queues

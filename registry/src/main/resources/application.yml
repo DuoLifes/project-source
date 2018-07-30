@@ -1,0 +1,24 @@
+server:
+  port: 8500
+
+spring:
+  application:
+    name: registry
+
+eureka:
+  server:
+    enable-self-preservation: false            # 设为false，关闭自我保护
+    eviction-interval-timer-in-ms: 3000        # 定期扫描失效服务间隔（单位毫秒，默认是60*1000）
+    response-cache-auto-expiration-in-seconds: 3
+    response-cache-update-interval-ms: 3000
+  instance:
+    lease-expiration-duration-in-seconds: 10 # 服务超过指定秒数没有发起renew请求的话，就会被当做失效服务剔除掉。
+    lease-renewal-interval-in-seconds: 5     # 服务发起renew续约间隔
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}[${random.int(1000,9999)}]
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8500/eureka/
+

@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: basic
+    globalException: false
+
+  cloud:
+      config:
+          enabled: false                       # 不使用远程配置中心
+
+server:
+  port: 0
+  tomcat:
+    accept-count: 5000
+    max-threads: 2000
+    min-spare-threads: 128
+    max-connections: 20000
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
+
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 10 # 服务超过指定秒数没有发起renew请求的话，就会被当做失效服务剔除掉。
+    lease-renewal-interval-in-seconds: 5     # 服务发起renew续约间隔
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}[${random.int(1000,9999)}]
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8500/eureka/

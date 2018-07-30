@@ -1,0 +1,58 @@
+server:
+  port: 8502
+
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+
+mq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  virtual-host: ddmp
+
+
+es:
+  cluster_name: elasticsearch
+  cluster_nodes: localhost:9300
+
+
+spring:
+  jackson:
+      date-format: yyyy-MM-dd HH:mm:ss
+      time-zone: GMT+8
+
+  rabbitmq:
+    host: ${mq.host}
+    port: ${mq.port}
+    username: ${mq.username}
+    password: ${mq.password}
+    virtual-host: ${mq.virtual-host}
+
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
+
+    stream:
+      bindings:
+        PROJECT_PortalData_Send:
+          destination: DPROJECT_PortalData_Queues
+
+        PROJECT_PortalData_Recv:
+          destination: DPROJECT_PortalData_Queues
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 45000
+
+management:
+  health:
+    elasticsearch:
+      enabled: false
