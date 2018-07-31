@@ -12,10 +12,17 @@ es:
   cluster_name: elasticsearch
   cluster_nodes: localhost:9300
 
+mongo:
+  uri: mongodb://localhost:27017/admin
+
 myProps:
   session-number: 30 # 取一段时间内销售会话数，当前时间为2018-02-28 11:05:22 设定值为30(单位/分钟)取2018-02-28 10:35:22内销售的会话数
 
 spring:
+  data:
+      mongodb:
+        uri: ${mongo.uri}
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
