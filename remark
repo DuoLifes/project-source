@@ -1,0 +1,11 @@
+basic:
+    1.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
+    2.SpringCloud框架整合SpringBoot。
+    3.注意启动类要注入事务层路径；配置文件要配置Mybatis的Mapper映射路径。
+
+multi-datasource:
+    1.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
+    2.非关系型数据库整合es,mongoDB。
+    3.SpringCloud框架整合SpringBoot.
+    4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
+    5.整合RabbitMQ,配置文件队列名要配置正确,es的节点名要和本机节点名一致，mongoDB的uri要添加本地数据库名。
