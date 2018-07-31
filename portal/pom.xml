@@ -41,6 +41,11 @@
 			<artifactId>transport</artifactId>
 			<version>5.5.0</version>
 		</dependency>
+		<!--Redis-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 		<!--SpringCloud-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
