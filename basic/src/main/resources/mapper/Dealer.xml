@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.connext.project.basic.repository.DealerRepository">
+    <resultMap id="BaseResultMap" type="com.cn.connext.project.basic.entity.Dealer">
+        <!--<result column="id" property="id" />-->
+        <!--<result column="siteCoreId" property="siteCoreId" />-->
+        <!--<result column="wechatAppId" property="wechatAppId" />-->
+        <!--<result column="wechatAppSecret" property="wechatAppSecret" />-->
+        <!--<result column="fax" property="fax" />-->
+    </resultMap>
+
+    <select id="findAll"  resultMap="BaseResultMap">
+        SELECT * FROM dealer
+    </select>
+
+    <!--<select id="add"  parameterType="Person">-->
+        <!--INSERT into person VALUES ('2','王鹤','上海')-->
+    <!--</select>-->
+
+    <!--<select id="findCount"  resultType="int">-->
+        <!--SELECT COUNT(1) FROM person-->
+    <!--</select>-->
+
+    <!--<select id="findByPage" resultMap="BaseResultMap">-->
+        <!--select * from person p ORDER BY p.id ASC-->
+        <!--limit #{begin},#{size}-->
+    <!--</select>-->
+
+    <!--<select id="PageAble" resultMap="BaseResultMap">-->
+        <!--select * from person p ORDER BY p.id ASC-->
+        <!--limit #{begin},#{size}-->
+    <!--</select>-->
+</mapper>
