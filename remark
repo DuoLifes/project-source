@@ -9,3 +9,8 @@ multi-datasource:
     3.SpringCloud框架整合SpringBoot.
     4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
     5.整合RabbitMQ,配置文件队列名要配置正确,es的节点名要和本机节点名一致，mongoDB的uri要添加本地数据库名。
+
+portal:
+    1.整合Elasticsearch,RabbitMQ,Redis。
+    2.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
+    3.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
