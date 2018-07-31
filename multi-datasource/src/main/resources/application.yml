@@ -8,6 +8,10 @@ mq:
   password: guest
   virtual-host: ddmp
 
+es:
+  cluster_name: elasticsearch
+  cluster_nodes: localhost:9300
+
 myProps:
   session-number: 30 # 取一段时间内销售会话数，当前时间为2018-02-28 11:05:22 设定值为30(单位/分钟)取2018-02-28 10:35:22内销售的会话数
 
@@ -61,6 +65,11 @@ spring:
 
         PROJECT_Multi-DataSource_Recv:
           destination: PROJECT_Multi-DataSource_Queues
+
+management:
+  health:
+    elasticsearch:
+      enabled: false
 
 feign:
   client:
