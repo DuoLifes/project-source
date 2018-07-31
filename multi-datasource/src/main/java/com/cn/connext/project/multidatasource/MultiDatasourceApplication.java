@@ -1,10 +1,9 @@
 package com.cn.connext.project.multidatasource;
 
-
-import com.cn.connext.project.framework.annotation.ConnextMicroServiceApplication;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@ConnextMicroServiceApplication
+@SpringBootApplication(scanBasePackages = {"com.cn.connext.project.multidatasource"})
 public class MultiDatasourceApplication {
 
 	public static void main(String[] args) {
