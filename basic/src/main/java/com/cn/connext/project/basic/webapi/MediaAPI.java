@@ -3,7 +3,7 @@ package com.cn.connext.project.basic.webapi;
 import com.cn.connext.project.basic.cache.GlobalCacheManager;
 import com.cn.connext.project.basic.cache.MediaCache;
 import com.cn.connext.project.basic.entity.Media;
-import com.cn.connext.project.basic.mq.BasicDataUpdatePublisher;
+import com.cn.connext.project.basic.mq.BasicDataSourceProductor;
 import com.cn.connext.project.basic.queryinfo.MediaQuery;
 import com.cn.connext.project.basic.service.MediaService;
 import com.cn.connext.project.framework.JSON;
@@ -31,7 +31,7 @@ public class MediaAPI {
     @Resource
     private MediaService mediaService;
     @Resource
-    private BasicDataUpdatePublisher basicDataUpdatePublisher;
+    private BasicDataSourceProductor basicDataSourceProductor;
     @Resource
     private MediaCache mediaCache;
     @Resource
@@ -121,7 +121,7 @@ public class MediaAPI {
         media.setCode("Tengxun");
         media.setName("腾讯");
         String msg= JSON.toJsonString(media).toString();
-        basicDataUpdatePublisher.send(msg);
+        basicDataSourceProductor.send(msg);
     }
 
 }

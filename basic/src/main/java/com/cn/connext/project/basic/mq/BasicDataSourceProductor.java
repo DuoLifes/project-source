@@ -8,23 +8,22 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Resource;
 
 @Component
-@EnableBinding({BasicDataUpdateSource.class})
-public class BasicDataUpdatePublisher {
+@EnableBinding({BasicDataSourceQueue.class})
+public class BasicDataSourceProductor {
 
-    Logger logger = LoggerFactory.getLogger(BasicDataUpdatePublisher.class);
+    Logger logger = LoggerFactory.getLogger(BasicDataSourceProductor.class);
 
     @Resource
-    @Qualifier(BasicDataUpdateSource.PROJECT_BASICDATA_SEND)
-    private MessageChannel basicData_update_send_channel;
+    @Qualifier(BasicDataSourceQueue.PROJECT_BASICDATA_SEND)
+    private MessageChannel basicData_send_channel;
 
     public void send(String msg) {
         Message<String> message = MessageBuilder.withPayload(msg).build();
         logger.info("send message:"+msg);
-        basicData_update_send_channel.send(message);
+        basicData_send_channel.send(message);
 
     }
 }
