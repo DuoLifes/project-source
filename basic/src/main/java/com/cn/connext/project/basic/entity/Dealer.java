@@ -35,7 +35,6 @@ public class Dealer implements Serializable {
     /**
      * 传真
      */
-
     private String fax;
     /**
      * 行政区域编号
