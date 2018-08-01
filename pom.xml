@@ -4,13 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<modules>
+		<module>registry</module>
 		<module>framework</module>
 		<module>common</module>
-		<module>registry</module>
+		<module>start-elasticsearch</module>
 		<module>basic</module>
 		<module>portal</module>
 		<module>multi-datasource</module>
-		<module>start-elasticsearch</module>
+		<module>devops</module>
 	</modules>
 
 	<parent>
