@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.connext.project.basic.repository.PartnerRepository">
+    <!--根据code查询所有实体，返回集合-->
+    <select id="findByCode"   resultType="com.cn.connext.project.basic.entity.Partner">-- 也可以使用resultType="map"
+        SELECT * FROM partner WHERE code=#{code}
+    </select>
+
+    <!--查询所有实体只包含特定字段-->
+    <select id="findIdAndName"   resultType="map">
+        SELECT id,`name` FROM partner
+    </select>
+
+    <!--动态查询-->
+    <select id="findByName"  parameterType="com.cn.connext.project.basic.entity.Partner" resultType="map">
+        select * from partner WHERE 1=1
+            <if test="code!=null">
+              AND  code=#{code}
+            </if>
+    </select>
+
+    <!--分页查询方法1-->
+    <select id="findCount"  resultType="int">
+        SELECT COUNT(1) FROM partner
+    </select>
+    <select id="findByPage" resultType="map">
+        select * from partner
+        limit #{begin},#{size}
+    </select>
+
+    <!--分页查询方法2-->
+    <select id="findPage" resultType="map">
+         select * from partner
+        limit #{begin},#{size}
+    </select>
+</mapper>
