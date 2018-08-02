@@ -33,4 +33,10 @@
          select * from partner
         limit #{begin},#{size}
     </select>
+
+    <!--分组聚合-->
+    <select id="findGroup" resultType="map">
+        select remark,count(1) AS "数量" from partner GROUP BY remark
+        ORDER  BY count(1)
+    </select>
 </mapper>

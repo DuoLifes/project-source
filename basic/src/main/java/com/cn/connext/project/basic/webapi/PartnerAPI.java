@@ -56,4 +56,10 @@ public class PartnerAPI {
         pageAble.setBegin((page-1)*size);
         return partnerService.findPage(pageAble);
     }
+
+    //分组聚合
+    @GetMapping("/group")
+    public List<Partner> findGroup(){
+        return partnerService.findGroup();
+    }
 }

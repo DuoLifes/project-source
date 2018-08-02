@@ -38,6 +38,11 @@ public class PartnerService {
         return partnerRepository.findPage(pageAble);
     }
 
+    //分组聚合
+    public List<Partner> findGroup(){
+        return partnerRepository.findGroup();
+    }
+
     //通用方法：计算begin值
     public Map countMap(Map<String, Object> map) {
         PageInfo<Partner>info=new PageInfo<Partner>();

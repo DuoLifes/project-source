@@ -32,4 +32,7 @@ public interface PartnerRepository {
 
     //分页查询方法2
     List<Partner> findPage(PageAble pageAble);
+
+    //分组聚合
+    List<Partner> findGroup();
 }
