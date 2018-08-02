@@ -19,6 +19,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.sort.SortOrder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -36,6 +38,8 @@ public class ElasticSearchBase {
 
     @Autowired
     protected TransportClient client;
+
+    Logger logger = LoggerFactory.getLogger(ElasticSearchBase.class);
 
     /**
      * 新建索引文档
@@ -55,6 +59,14 @@ public class ElasticSearchBase {
                     .setSource(sourceStr, XContentType.JSON).execute().actionGet();
         } catch (NoNodeAvailableException e) {
             throw e;
+        }
+    }
+
+    public void delete(String index,String type,String id){
+        try{
+            client.prepareDelete(index,type,id).execute().actionGet();
+        }catch (Exception e){
+            logger.info("删除失败："+e.toString());
         }
     }
 

@@ -1,6 +1,6 @@
 package com.cn.connext.project.portal.repository;
 
-import com.cn.connext.project.portal.entity.Media;
+import com.cn.connext.project.portal.entity.VehicleModel;
 import com.cn.connext.project.startelasticsearch.ElasticSearchBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,10 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author zhangpeiyu
+ * @author 张帅
  */
 @Repository
-public class MediaEsRepository {
+public class VehicleModelEsRepository {
 
     private String index;
 
@@ -20,11 +20,15 @@ public class MediaEsRepository {
     @Autowired
     public ElasticSearchBase elasticSearchBase;
 
-    public void create(Media media) {
+    public void create(VehicleModel vehicleModel) {
         SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMM");
-        index = "media-" + dateFormater.format(new Date());
-        type = "media";
-        elasticSearchBase.create(index, type, null, media);
+        index = "vehiclemodel-" + dateFormater.format(new Date());
+        type = "vehiclemodel";
+        elasticSearchBase.create(index, type, null, vehicleModel);
+    }
+
+    public void delete(String index,String type,String id){
+        elasticSearchBase.delete(index,type,id);
     }
 
 }
