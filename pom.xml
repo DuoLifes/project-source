@@ -11,6 +11,7 @@
 		<module>basic</module>
 		<module>portal</module>
 		<module>multi-datasource</module>
+		<module>data-poi</module>
 		<module>devops</module>
 	</modules>
 
