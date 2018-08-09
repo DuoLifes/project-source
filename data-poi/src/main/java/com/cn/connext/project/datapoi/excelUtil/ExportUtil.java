@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
 
@@ -21,8 +22,11 @@ public class ExportUtil {
 
     public void exportMediaType() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        File file = new File("d:\\工作簿.xlsx");
+        if (!file.exists())
+            System.out.println("文件不存在");
         try {
-            FileInputStream inputStream = new FileInputStream("d:\\工作簿.xlsx");
+            FileInputStream inputStream = new FileInputStream(file);
             //将输入流转换为workbook
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             //获取工作表

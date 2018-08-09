@@ -3,10 +3,9 @@ package com.cn.connext.project.datapoi.excelUtil;
 import com.cn.connext.project.datapoi.entity.MediaType;
 import com.cn.connext.project.datapoi.repository.MediaTypeRepository;
 import com.cn.connext.project.datapoi.service.MediaTypeService;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.xssf.usermodel.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,10 +26,24 @@ public class ImportUtil {
             XSSFWorkbook workbook = new XSSFWorkbook();
             //新建工作表
             XSSFSheet sheet = workbook.createSheet("MediaType");
+            CellStyle cellStyle = workbook.createCellStyle();
+            // 设置这些样式
+            cellStyle.setBorderBottom(CellStyle.BORDER_THIN);
+            cellStyle.setBorderLeft(CellStyle.BORDER_THIN);
+            cellStyle.setBorderRight(CellStyle.BORDER_THIN);
+            cellStyle.setBorderTop(CellStyle.BORDER_THIN);
+            cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            XSSFFont contentFont = workbook.createFont(); // 定义字体
+            contentFont.setFontName("微软雅黑");//设置字体
+            contentFont.setFontHeightInPoints((short) 10);//设置字号
+            contentFont.setBold(true);//设置加粗
+            cellStyle.setFont(contentFont);
+            //查询数据
             List<MediaType> list=mediaTypeRepository.findAll();
             for(int i=0;i<list.size();i++){
                 XSSFRow row = sheet.createRow(i);
                 XSSFCell cell1 = row.createCell(0);
+                cell1.setCellStyle(cellStyle);
                 cell1.setCellValue(list.get(i).getId());
                 XSSFCell cell2 = row.createCell(1);
                 cell2.setCellValue(list.get(i).getName());
