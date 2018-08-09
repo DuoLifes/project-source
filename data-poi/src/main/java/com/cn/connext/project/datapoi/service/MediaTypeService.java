@@ -91,5 +91,13 @@ public class MediaTypeService {
         return mediaTypeRepository.findList(queryBuilder);
     }
 
+    /**
+     * 无条件查询所有匹配的记录。
+     * @return 返回数据集合信息
+     */
+    public List<MediaType> findAll() {
+        return mediaTypeRepository.findAll();
+    }
+
 }
 
