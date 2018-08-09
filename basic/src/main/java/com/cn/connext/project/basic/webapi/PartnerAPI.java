@@ -36,6 +36,11 @@ public class PartnerAPI {
         return partnerService.selectByCode(partner.getCode());
     }
 
+    @GetMapping("/findAll")
+    public List<Partner> findAll(){
+        return partnerService.findAll();
+    }
+
     //分页查询1
     @GetMapping("/findByPage")
     public List<Partner> findByPage(@RequestParam (required = false)Integer page,

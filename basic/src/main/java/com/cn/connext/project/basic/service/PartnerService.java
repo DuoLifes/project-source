@@ -27,6 +27,10 @@ public class PartnerService {
         return partnerRepository.selectByCode(code);
     }
 
+    public List<Partner> findAll(){
+        return partnerRepository.findAll();
+    }
+
     //分页查询方法1
     public List<Partner> findByPage(Map<String, Object> map){
         Map<String,Object> countMap=countMap(map);
