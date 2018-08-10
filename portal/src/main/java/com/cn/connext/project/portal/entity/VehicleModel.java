@@ -64,7 +64,7 @@ public class VehicleModel {
      * 年份
      */
 
-    private String year;
+    private Integer year;
     /**
      * 是否在售
      */
@@ -91,6 +91,9 @@ public class VehicleModel {
 
     private Date updateTime;
 
+    /**
+     * 进口国产FBU/CKD
+     */
     private String extValue;
 
     /**
@@ -249,14 +252,14 @@ public class VehicleModel {
     /**
      * 获取年份。
      */
-    public String getYear() {
+    public Integer getYear() {
         return year;
     }
 
     /**
      * 设置年份。
      */
-    public void setYear(String year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
