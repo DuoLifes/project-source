@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 张帅
@@ -43,6 +44,11 @@ public class VehicleModelEsRepository extends ElasticSearchBase{
     //删除文档
     public void delete(String index,String type,String id){
         delete(index,type,id);
+    }
+
+    //更新文档
+    public void update(String index,String type,String id,Map<String, Object> maps){
+        update(index,type,id,maps);
     }
 
     //动态查询文档
