@@ -16,6 +16,7 @@ portal:
     2.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
     3.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
     4.通过Client调用Basic服务里partner的接口，注意先启动basic服务。
+    5.Elasticsearch增删改查业务逻辑。
 
 devops:
     1.整合前后端，注意登录页的路径配置，静态页面，CSS样式，JS等路径的配置。

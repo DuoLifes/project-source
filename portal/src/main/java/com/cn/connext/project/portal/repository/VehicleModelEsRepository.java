@@ -13,11 +13,8 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,21 +34,7 @@ public class VehicleModelEsRepository extends ElasticSearchBase{
     private  String index = "vehiclemodel-" + dateFormater.format(new Date());
     private  String type = "vehiclemodel";
 
-    //创建文档
-    public void create(VehicleModel vehicleModel) {
-        create(index, type, null, vehicleModel);
-    }
-    //删除文档
-    public void delete(String index,String type,String id){
-        delete(index,type,id);
-    }
-
-    //更新文档
-    public void update(String index,String type,String id,Map<String, Object> maps){
-        update(index,type,id,maps);
-    }
-
-    //动态查询文档
+    //查询文档（自定义方法）
     public List<VehicleModel> modelSearch(VehicleModelParam vehicleModelParam) {
         //创建And查询容器
         BoolQueryBuilder andQuery = QueryBuilders.boolQuery();

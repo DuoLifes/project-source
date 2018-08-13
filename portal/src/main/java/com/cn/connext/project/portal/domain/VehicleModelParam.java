@@ -5,52 +5,34 @@ import java.util.List;
 
 public class VehicleModelParam {
 
-    private List<String> seriesIdList;
+    public List<String> seriesIdList;
 
-    private List<String> typeIdList;
+    public List<String> typeIdList;
 
-    private String beginYear;
+    public String beginYear;
 
-    private String endYear;
+    public String endYear;
 
-    private String name;
+    public String name;
 
-    private String code;
+    public String code;
 
-    private String isInvalid;
+    public String isInvalid;
 
-    private Date beginUpdateTime;
+    public Date beginUpdateTime;
 
-    private Date endUpdateTime;
+    public Date endUpdateTime;
 
-    private String extValue;
+    public String extValue;
+
+    public String id;
+
+    public String index;
+
+    public String type;
 
     //get set function()
 
-
-    public String getExtValue() {
-        return extValue;
-    }
-
-    public void setExtValue(String extValue) {
-        this.extValue = extValue;
-    }
-
-    public Date getBeginUpdateTime() {
-        return beginUpdateTime;
-    }
-
-    public void setBeginUpdateTime(Date beginUpdateTime) {
-        this.beginUpdateTime = beginUpdateTime;
-    }
-
-    public Date getEndUpdateTime() {
-        return endUpdateTime;
-    }
-
-    public void setEndUpdateTime(Date endUpdateTime) {
-        this.endUpdateTime = endUpdateTime;
-    }
 
     public List<String> getSeriesIdList() {
         return seriesIdList;
@@ -106,5 +88,53 @@ public class VehicleModelParam {
 
     public void setIsInvalid(String isInvalid) {
         this.isInvalid = isInvalid;
+    }
+
+    public Date getBeginUpdateTime() {
+        return beginUpdateTime;
+    }
+
+    public void setBeginUpdateTime(Date beginUpdateTime) {
+        this.beginUpdateTime = beginUpdateTime;
+    }
+
+    public Date getEndUpdateTime() {
+        return endUpdateTime;
+    }
+
+    public void setEndUpdateTime(Date endUpdateTime) {
+        this.endUpdateTime = endUpdateTime;
+    }
+
+    public String getExtValue() {
+        return extValue;
+    }
+
+    public void setExtValue(String extValue) {
+        this.extValue = extValue;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

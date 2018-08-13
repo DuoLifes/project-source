@@ -44,7 +44,7 @@ public class ElasticSearchBase {
     /**
      * 新建索引文档
      */
-    public IndexResponse create(String index, String type, String id, Object source) {
+    public IndexResponse createDocument(String index, String type, String id, Object source) {
         ObjectMapper objectMapper = new ObjectMapper();
         String sourceStr;
         try {
@@ -62,7 +62,7 @@ public class ElasticSearchBase {
         }
     }
 
-    public void delete(String index,String type,String id){
+    public void deleteDocument(String index,String type,String id){
         try{
             client.prepareDelete(index,type,id).execute().actionGet();
         }catch (Exception e){
@@ -73,7 +73,7 @@ public class ElasticSearchBase {
     /**
      * 更新文档
      */
-    public void update(String index, String type, String id, Map<String, Object> maps) {
+    public void updateDocument(String index, String type, String id, Map<String, Object> maps) {
         ObjectMapper objectMapper = new ObjectMapper();
         String sourceStr = "";
         try {
