@@ -58,10 +58,43 @@ public class VehicleModelEsAPI {
         return vehicleModelEsRepository.findPage(index,type,queryBuilder,new PageRequest(0,2),VehicleModel.class);
     }
 
+    //查询总数
+    @PostMapping("/count")
+    public long count(@RequestBody VehicleModelParam vehicleModelParam){
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                .must(QueryBuilders.termQuery("name", vehicleModelParam.name));
+        return vehicleModelEsRepository.count(index,type,queryBuilder);
+    }
+
+    //分组查询
+    @PostMapping("/countGroup")
+    public Map<String, Integer> countGroup(@RequestBody VehicleModelParam vehicleModelParam){
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                .must(QueryBuilders.termQuery("code", vehicleModelParam.code));
+        String groupName="名称";//别名
+        String field="name";//列名
+        return vehicleModelEsRepository.countGroup(index,type,groupName,field,queryBuilder);
+    }
+
+    //查询列表
+    @PostMapping("/findList")
+    public List<VehicleModel> findList(@RequestBody VehicleModelParam vehicleModelParam){
+        QueryBuilder queryBuilder = QueryBuilders.boolQuery()
+                .must(QueryBuilders.termQuery("name", vehicleModelParam.name));
+        return vehicleModelEsRepository.findList(index,type,queryBuilder,VehicleModel.class);
+    }
+
+    //===========================================================================================//
 
     //查询文档（自定义方法)
     @PostMapping("/search")
     public List<VehicleModel> modelSearch(@RequestBody VehicleModelParam vehicleModelParam){
         return vehicleModelEsRepository.modelSearch(vehicleModelParam);
+    }
+
+    //多重聚合（自定义方法）
+    @GetMapping("/countGroups")
+    public Map<String, Long> countGroups(){
+        return vehicleModelEsRepository.countGroups();
     }
 }

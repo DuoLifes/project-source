@@ -1,0 +1,64 @@
+curl -XPUT localhost:9200/vehiclemodel-201808
+{
+  "settings": {
+    "number_of_shards": 5
+  },
+  "mappings": {
+    "vehiclemodel": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "siteCoreId": {
+          "type": "keyword"
+        },
+        "seriesId": {
+          "type": "keyword"
+        },
+        "typeId": {
+          "type": "keyword"
+        },
+        "name": {
+          "type": "keyword"
+        },
+        "enName": {
+          "type": "keyword"
+        },
+        "code": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "keyword"
+        },
+        "guidePrice": {
+          "type": "keyword"
+        },
+        "year": {
+          "type": "integer"
+        },
+        "isSale": {
+          "type": "boolean"
+        },
+        "createIndex": {
+          "type": "integer"
+        },
+        "remark": {
+          "type": "keyword"
+        },
+        "dealerId": {
+          "type": "keyword"
+        },
+        "isInvalid": {
+          "type": "boolean"
+        },
+        "extValue": {
+          "type": "keyword"
+        },
+        "updateTime": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+        }
+      }
+    }
+  }
+}

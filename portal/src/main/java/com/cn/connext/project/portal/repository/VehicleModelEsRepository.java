@@ -4,12 +4,17 @@ import com.cn.connext.project.framework.JSON;
 import com.cn.connext.project.portal.domain.VehicleModelParam;
 import com.cn.connext.project.portal.entity.VehicleModel;
 import com.cn.connext.project.startelasticsearch.ElasticSearchBase;
+import com.google.common.collect.Maps;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.AggregationBuilder;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.histogram.Histogram;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +70,7 @@ public class VehicleModelEsRepository extends ElasticSearchBase{
         //开始查询
         SearchRequestBuilder requestBuilder = client
                 .prepareSearch(index)
-                .setTypes(index)
+                .setTypes(type)
                 .setQuery(mainQuery)
                 .setFrom(0)
                 .setSize(10000);
@@ -86,6 +91,40 @@ public class VehicleModelEsRepository extends ElasticSearchBase{
             }
         }
         return list;
+    }
+
+    //多重聚合（自定义方法）
+    public Map<String, Long> countGroups(){
+        AggregationBuilder nameAggregation = AggregationBuilders
+                .terms("name")
+                .field("name")
+                .minDocCount(1);
+
+        AggregationBuilder mainAggregation = AggregationBuilders
+                .terms("code")
+                .field("code")
+                .minDocCount(1)
+                .subAggregation(nameAggregation);
+
+        SearchRequestBuilder requestBuilder = client
+                .prepareSearch(index)
+                .setTypes(type)
+               // .setQuery(mainQuery)
+                .setFrom(0)
+                .setSize(10000)
+                .addAggregation(mainAggregation);
+
+        Map<String, Long> map = Maps.newHashMap();
+        StringTerms codeHistogram = requestBuilder.execute().actionGet().getAggregations().get("code");
+        List<StringTerms.Bucket> codeBuckets = codeHistogram.getBuckets();
+        codeBuckets.forEach(codebucket -> {
+            StringTerms nameHistogram = codebucket.getAggregations().get("name");
+            List<StringTerms.Bucket> nameBuckets = nameHistogram.getBuckets();
+            nameBuckets.forEach(nameBucket -> {
+                    map.put(codebucket.getKey().toString() + "&&" + nameBucket.getKey().toString(), nameBucket.getDocCount());
+            });
+        });
+        return map;
     }
 
 }
