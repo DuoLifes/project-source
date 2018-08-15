@@ -1,7 +1,7 @@
 basic:
     1.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
     2.SpringCloud框架整合SpringBoot。
-    3.注意启动类要注入事务层路径；配置文件要配置Mybatis的Mapper映射路径。
+    3.(!!!注意启动类要注入事务层路径--后来不需要注入也可以，在mapper.xml中配置事务层路径)；配置文件要配置Mybatis的Mapper映射路径。
     4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
     5.JPA按例查询：
     通过在使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
