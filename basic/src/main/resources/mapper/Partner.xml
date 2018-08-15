@@ -12,7 +12,7 @@
     </select>
 
     <!--动态查询-->
-    <select id="findByName"  parameterType="com.cn.connext.project.basic.entity.Partner" resultType="map">
+    <select id="selectByCode"  parameterType="String" resultType="map">
         select * from partner WHERE 1=1
             <if test="code!=null">
               AND  code=#{code}

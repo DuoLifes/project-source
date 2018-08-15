@@ -2,7 +2,12 @@ basic:
     1.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
     2.SpringCloud框架整合SpringBoot。
     3.注意启动类要注入事务层路径；配置文件要配置Mybatis的Mapper映射路径。
-    4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写。
+    4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
+    5.JPA按例查询：
+    通过在使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
+    对于非字符串属性的只能精确匹配，比如想查询在某个时间段内注册的用户信息，就不能通过Example来查询。
+    6.JPACriteria API动态查询。构建查询容器。
+
 
 multi-datasource:
     1.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
@@ -16,7 +21,7 @@ portal:
     2.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
     3.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
     4.通过Client调用Basic服务里partner的接口，注意先启动basic服务。
-    5.Elasticsearch增删改查业务逻辑。
+    5.Elasticsearch增删改查业务逻辑。注意索引的建立要设置字段数据类型。通过postman创建索引最方便。
 
 devops:
     1.整合前后端，注意登录页的路径配置，静态页面，CSS样式，JS等路径的配置。

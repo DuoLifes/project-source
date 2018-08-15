@@ -12,6 +12,7 @@ import com.cn.connext.project.framework.annotation.WebAPI;
 import com.cn.connext.project.framework.query.QueryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -122,6 +123,39 @@ public class MediaAPI {
         media.setName("腾讯");
         String msg= JSON.toJsonString(media).toString();
         basicDataSourceProductor.send(msg);
+    }
+
+    //JPA封装方法直接调用
+    @GetMapping("/findAllByCodeAndName")
+    public List<Media> findAllByCodeAndName(@RequestParam String code,@RequestParam String name){
+        return mediaService.findAllByCodeAndName(code,name);
+    }
+
+    //JPA自定义SQL
+    @GetMapping("/findAllByCode")
+    public List<Media> findAllByCode(@RequestParam String code){
+        return mediaService.findAllByCode(code);
+    }
+
+    //按例查询（example）
+    @PostMapping("/findByExample")
+    public List<Media> findByExample(@RequestBody Media media){
+        media.setUpdateTime(null);//用按例Example查询，默认情况下会忽略空值。
+        media.setId(null);//由于默认实例化这三个字段有值，会影响查询。
+        media.setIsInvalid(null);//所以无关查询字段要置空。
+        return mediaService.findByExample(media);
+    }
+
+    //自定义按例查询
+    @PostMapping("/findByCustomExample")
+    public List<Media> findByCustomExample(@RequestBody Media media){
+        return mediaService.findByCustomExample(media);
+    }
+
+    //Criteria API动态查询
+    @PostMapping("/findByCriteria")
+    public List<Media> findByCriteria(@RequestBody Media media){
+        return mediaService.findByCriteria(media);
     }
 
 }

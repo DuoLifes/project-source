@@ -3,6 +3,7 @@ package com.cn.connext.project.basic.repository;
 import com.cn.connext.project.basic.domain.PageAble;
 import com.cn.connext.project.basic.entity.Partner;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface PartnerRepository {
     List<Partner> findAll();
 
     //动态查询
-    List<Partner> selectByCode(String code);
+    List<Partner> selectByCode(@Param("code") String code);
 
     //查询总条数
     public int findCount();
