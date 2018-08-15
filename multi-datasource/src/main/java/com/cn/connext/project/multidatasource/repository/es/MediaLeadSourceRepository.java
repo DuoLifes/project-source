@@ -22,7 +22,7 @@ public class MediaLeadSourceRepository {
         SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMM");
         index = "medialeadsource-" + dateFormater.format(new Date());
         type = "medialeadsource";
-        elasticSearchBase.create(index, type, null, mediaLeadSource);
+        elasticSearchBase.createDocument(index, type, null, mediaLeadSource);
         return mediaLeadSource;
     }
 }

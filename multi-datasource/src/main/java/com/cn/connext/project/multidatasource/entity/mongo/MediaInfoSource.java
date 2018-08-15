@@ -22,6 +22,13 @@ public class MediaInfoSource {
         createTime = new Date();
     }
 
+    public MediaInfoSource toString(MediaInfoSource mediaInfoSource, Integer i){
+        mediaInfoSource.name="名称"+i;
+        mediaInfoSource.type="媒体"+i;
+        mediaInfoSource.remark="备注"+i;
+        return mediaInfoSource;
+    }
+
     public String getId() {
         return id;
     }
