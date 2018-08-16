@@ -4,7 +4,7 @@ basic:
     3.（!!!注意启动类要注入事务层路径--现在不需要注入，在yml配置路径）;配置文件要配置Mybatis的Mapper映射路径。
     4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
     5.JPA按例查询：
-    通过在使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
+    使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
     对于非字符串属性的只能精确匹配，比如想查询在某个时间段内注册的用户信息，就不能通过Example来查询。
     6.JPACriteria API动态查询。构建查询容器。
 
