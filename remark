@@ -1,6 +1,6 @@
 basic:
-    1.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
-    2.SpringBoot框架整合SpringCloud。
+    。
+    2.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
     3.（!!!注意启动类要注入事务层路径--现在不需要注入，在yml配置路径）;配置文件要配置Mybatis的Mapper映射路径。
     4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
     5.JPA按例查询：
@@ -9,19 +9,22 @@ basic:
     6.JPACriteria API动态查询。构建查询容器。
 
 
+portal:
+    1.SpringBoot框架整合SpringCloud
+    2.整合Elasticsearch,RabbitMQ,Redis。
+    3.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
+    4.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
+    5.通过Client调用Basic服务里partner的接口，注意先启动basic服务。
+    6.Elasticsearch增删改查业务逻辑。注意索引的建立要设置字段数据类型。通过postman创建索引最方便。
+
+
 multi-datasource:
-    1.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
-    2.非关系型数据库整合es,mongoDB。
-    3.SpringBoot框架整合SpringCloud.
+    1.SpringBoot框架整合SpringCloud.
+    2.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
+    3.非关系型数据库整合es,mongoDB;mongoDB全套增删改查。
     4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
     5.整合RabbitMQ,配置文件队列名要配置正确,es的节点名要和本机节点名一致，mongoDB的uri要添加本地数据库名。
 
-portal:
-    1.整合Elasticsearch,RabbitMQ,Redis。
-    2.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
-    3.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
-    4.通过Client调用Basic服务里partner的接口，注意先启动basic服务。
-    5.Elasticsearch增删改查业务逻辑。注意索引的建立要设置字段数据类型。通过postman创建索引最方便。
 
 devops:
     1.整合前后端，注意登录页的路径配置，静态页面，CSS样式，JS等路径的配置。

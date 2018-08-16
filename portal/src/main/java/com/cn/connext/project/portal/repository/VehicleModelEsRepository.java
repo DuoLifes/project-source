@@ -34,7 +34,6 @@ public class VehicleModelEsRepository extends ElasticSearchBase{
 
     private final static Logger LOGGER = LoggerFactory.getLogger(VehicleModelEsRepository.class);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     SimpleDateFormat dateFormater = new SimpleDateFormat("yyyyMM");
     private  String index = "vehiclemodel-" + dateFormater.format(new Date());
     private  String type = "vehiclemodel";

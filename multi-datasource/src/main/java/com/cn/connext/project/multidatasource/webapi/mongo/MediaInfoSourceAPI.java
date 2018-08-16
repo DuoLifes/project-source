@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @WebAPI("/api/multi-datasource/mediaInfoSource")
 public class MediaInfoSourceAPI {
@@ -34,4 +35,21 @@ public class MediaInfoSourceAPI {
          mediaInfoSourceService.delete(id);
     }
 
+    //根据id查询文档
+    @GetMapping("/findDocumentById")
+    public MediaInfoSource findDocumentById(@RequestParam String id){
+        return mediaInfoSourceService.findDocumentById(id);
+    }
+
+    //条件查询文档 Criteria构造查询条件
+    @GetMapping("/findDocumentByName")
+    public List<MediaInfoSource> findOne(@RequestParam String name){
+        return mediaInfoSourceService.findDocumentByName(name);
+    }
+
+    //多条件查询 Criteria构造查询条件
+    @GetMapping("/findOneByNameAndRemark")
+    public List<MediaInfoSource> findOneByNameAndRemark(@RequestParam String name,@RequestParam String remark){
+        return mediaInfoSourceService.findOneByNameAndRemark(name,remark);
+    }
 }
