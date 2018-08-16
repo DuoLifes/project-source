@@ -24,6 +24,7 @@ multi-datasource:
     3.非关系型数据库整合es,mongoDB;mongoDB全套增删改查。
     4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
     5.整合RabbitMQ,配置文件队列名要配置正确,es的节点名要和本机节点名一致，mongoDB的uri要添加本地数据库名。
+    6.整合mongoDB全套增删改查方法,通过调用MediaInfoSourceRepository以及MongoTemplete封装层的方法,各有优势。
 
 
 devops:
