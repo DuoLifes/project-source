@@ -1,10 +1,10 @@
 basic:
     1.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
-    2.SpringBoot框架整合SpringCloud。
+    2.SpringCloud框架整合SpringBoot。
     3.注意启动类要注入事务层路径；配置文件要配置Mybatis的Mapper映射路径。
     4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
     5.JPA按例查询：
-    使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
+    通过在使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
     对于非字符串属性的只能精确匹配，比如想查询在某个时间段内注册的用户信息，就不能通过Example来查询。
     6.JPACriteria API动态查询。构建查询容器。
 
@@ -12,7 +12,7 @@ basic:
 multi-datasource:
     1.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
     2.非关系型数据库整合es,mongoDB。
-    3.SpringBoot框架整合SpringCloud。
+    3.SpringCloud框架整合SpringBoot.
     4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
     5.整合RabbitMQ,配置文件队列名要配置正确,es的节点名要和本机节点名一致，mongoDB的uri要添加本地数据库名。
 
