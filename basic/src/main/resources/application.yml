@@ -27,7 +27,7 @@ spring:
     time-zone: GMT+8
 
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: none
       naming:

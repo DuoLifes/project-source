@@ -10,6 +10,22 @@ public class ScoreService {
     @Resource
     private ScoreRepository scoreRepository;
 
+    //验证级联增加
+    public Score create(Score score){
+        return scoreRepository.create(score);
+    }
+
+    //验证级联删除
+    public void delete(Long id){
+        scoreRepository.deleteById(id);
+    }
+
+    //验证级联修改
+    public void update(Score score){
+        scoreRepository.save(score);
+    }
+
+    //查询
     public Score findById(Long id){
         return scoreRepository.findById(id);
     }

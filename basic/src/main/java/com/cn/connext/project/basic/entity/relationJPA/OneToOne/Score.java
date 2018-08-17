@@ -10,7 +10,7 @@ import java.io.Serializable;
 * 双向一对一关联，被维护方:通过mappedBy注解定义关系是双向的，而且mappedBy注释指定了这个实体是被关系维护端的那个属性所维护。
 */
 
-/*
+/*  四种防止查询序列化的时候陷入死循环的方式
 * 1.   @JsonIgnore
 * 在不希望被序列化的field或property上使用@JsonIgnore标记，即可使该属性在序列化和解序列化的过程中不被访问。
 * 2.    @JsonManagedReference and @JsonBackReference.
@@ -31,7 +31,7 @@ import java.io.Serializable;
 // 通过这种方式辨别实例。这种方式适用于存在一个实体关联链的场景
 public class Score implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//主键自增
+    //@GeneratedValue(strategy = GenerationType.AUTO)//主键自增  //设置 id 为自增长,做关联的情况尽量不要用，因为会在级联删除增加修改的时候带来麻烦
     private Long id;
 
     @Column(name = "chinese_score")//语文分数
