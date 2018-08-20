@@ -12,7 +12,12 @@ public class StudentAPI {
     @Resource
     private StudentService studentService;
 
-    //验证级联增加
+    /*  student作为维护端可以增加自己也可以增加被维护端的score，
+    *   如果score已经被创建则不会重新创建，其中score值不变，
+    *   则只增加student，score值改变则执行修改grade和增加teacher
+    *   若score没有被创建，则先创建score再创建student.
+    */
+    //增加
     @PostMapping("/create")
     public Student create(@RequestBody Student student){
         return studentService.create(student);

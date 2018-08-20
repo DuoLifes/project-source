@@ -12,21 +12,9 @@ public class ScoretAPI {
     @Resource
     private ScoreService scoreService;
 
-    //验证级联增加
-    /*      从字表方向向主表方向的增加逻辑有误，无法实现，主表外键列为空
-            @PostMapping("/create")
-            public Score create(@RequestBody Score score){
-                return scoreService.create(score);
-                }
-    */
-
-    //验证级联修改
-    @PutMapping("/update")
-    /*
-    * 修改参数为:{"id": 2,"chinese": 77, "math": 88} 不能带主表参数，否则主表外键则无法修改被置空
-    */
-    public void update(@RequestBody Score score){
-        scoreService.update(score);
+    //增加/修改 (由于Score是被维护端所以无法增加修改维护端的数据，只能增加修改Score本身)
+    public void save(@RequestBody Score score){
+        scoreService.save(score);
     }
 
     //验证级联删除
