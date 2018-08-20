@@ -13,13 +13,18 @@ public class ScoretAPI {
     private ScoreService scoreService;
 
     //验证级联增加
-    @PostMapping("/create")
-    public Score create(@RequestBody Score score){
-        return scoreService.create(score);
-    }
+    /*      从字表方向向主表方向的增加逻辑有误，无法实现，主表外键列为空
+            @PostMapping("/create")
+            public Score create(@RequestBody Score score){
+                return scoreService.create(score);
+                }
+    */
 
     //验证级联修改
     @PutMapping("/update")
+    /*
+    * 修改参数为:{"id": 2,"chinese": 77, "math": 88} 不能带主表参数，否则主表外键则无法修改被置空
+    */
     public void update(@RequestBody Score score){
         scoreService.update(score);
     }

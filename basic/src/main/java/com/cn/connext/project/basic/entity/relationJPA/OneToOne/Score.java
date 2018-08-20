@@ -26,9 +26,13 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "score")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")  //该annotation用于标注在entity上。
-// 当entity被标注后，jackson在每一次序列化的时候都会为该实例生成专门的ID（也可以是实例自带的属性），
-// 通过这种方式辨别实例。这种方式适用于存在一个实体关联链的场景
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class,property = "@id")
+/*
+*  该annotation用于标注在entity上。
+ 当entity被标注后，jackson在每一次序列化的时候都会为该实例生成专门的ID（也可以是实例自带的属性），
+ 通过这种方式辨别实例。这种方式适用于存在一个实体关联链的场景
+ */
+
 public class Score implements Serializable {
     @Id
     //@GeneratedValue(strategy = GenerationType.AUTO)//主键自增  //设置 id 为自增长,做关联的情况尽量不要用，因为会在级联删除增加修改的时候带来麻烦
