@@ -1,4 +1,4 @@
-package com.cn.connext.project.basic.entity.relationMybatis.ManyToOne;
+package com.cn.connext.project.ibatisbasic.entity;
 
 import lombok.Data;
 

@@ -13,6 +13,7 @@ public class ScoretAPI {
     private ScoreService scoreService;
 
     //增加/修改 (由于Score是被维护端所以无法增加修改维护端的数据，只能增加修改Score本身)
+    @PostMapping("/save")
     public void save(@RequestBody Score score){
         scoreService.save(score);
     }

@@ -18,9 +18,9 @@ public class StudentAPI {
     *   若score没有被创建，则先创建score再创建student.
     */
     //增加
-    @PostMapping("/create")
-    public Student create(@RequestBody Student student){
-        return studentService.create(student);
+    @PostMapping("/save")
+    public Student save(@RequestBody Student student){
+        return studentService.save(student);
     }
 
     //验证级联修改

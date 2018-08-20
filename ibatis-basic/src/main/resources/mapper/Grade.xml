@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.connext.project.ibatisbasic.repository.GradeRepository">
+    <resultMap type="Grade" id="gradeMap">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <collection property="list" ofType="Teacher">
+            <id column="t_id" property="id"/>
+            <result column="t_name" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="findAll"  resultMap="gradeMap">
+        select g.id,g.name,t.id AS t_id,t.name AS t_name FROM grade g INNER JOIN teacher t ON t.grade_id=g.id
+    </select>
+</mapper>

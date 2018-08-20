@@ -9,6 +9,7 @@
 		<module>common</module>
 		<module>start-elasticsearch</module>
 		<module>basic</module>
+		<module>ibatis-basic</module>
 		<module>portal</module>
 		<module>multi-datasource</module>
 		<module>data-poi</module>

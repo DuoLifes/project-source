@@ -1,5 +1,5 @@
 server:
-  port: 8501
+  port: 8506
 
 db:
   host: localhost
@@ -7,15 +7,9 @@ db:
   username: root
   password: 123456
 
-mq:
-  host: 127.0.0.1
-  port: 5672
-  username: guest
-  password: guest
-  virtual-host: ddmp
 
 mybatis:
-    typeAliasesPackage: com.cn.connext.project.basic.entity
+    typeAliasesPackage: com.cn.connext.project.ibatisbasic.entity;
     mapperLocations: classpath:mapper/*.xml
 
 myProps:
@@ -26,13 +20,6 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
@@ -40,26 +27,8 @@ spring:
     username: ${db.username}
     password: ${db.password}
     hikari:
-      pool-name: ddmp-basic
+      pool-name: ibatis-basic
       cachePrepStmts: true
       prepStmtCacheSize: 250
       prepStmtCacheSqlLimit: 2048
       useServerPrepStmts: true
-
-
-  rabbitmq:
-    host: ${mq.host}
-    port: ${mq.port}
-    username: ${mq.username}
-    password: ${mq.password}
-    virtual-host: ${mq.virtual-host}
-
-
-  cloud:
-    stream:
-      bindings:
-        PROJECT_BasicData_Send:
-          destination: PROJECT_BasicData_Queues
-
-        PROJECT_BasicData_Recv:
-          destination: PROJECT_BasicData_Queues

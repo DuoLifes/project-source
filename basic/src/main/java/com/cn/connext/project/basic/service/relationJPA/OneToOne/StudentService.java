@@ -13,8 +13,8 @@ public class StudentService {
     private StudentRepository studentRepository;
 
     //验证级联增加
-    public Student create(Student student){
-        return studentRepository.create(student);
+    public Student save(Student student){
+        return studentRepository.save(student);
     }
 
     //验证级联删除

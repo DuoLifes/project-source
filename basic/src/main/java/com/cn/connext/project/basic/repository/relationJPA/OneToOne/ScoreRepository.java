@@ -13,7 +13,6 @@ public interface ScoreRepository extends ConnextRepository<Score, String>, JpaRe
 
     Score findById(Long id);
 
-    @Transactional
-        //级联删除要通过此注解进行事务管理
+    @Transactional//级联删除要通过此注解进行事务管理
     void deleteById(Long id);
 }

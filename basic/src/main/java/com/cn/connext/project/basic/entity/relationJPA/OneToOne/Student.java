@@ -44,7 +44,7 @@ public class Student implements Serializable {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL,optional=false )//设置映射级联,当student删除的时候，score对应也会删除(必须在主体类设置)
-    @JoinColumn(name="scoreId")//关联的表为score表，其主键是id
+    @JoinColumn(name="score_id")//关联的表为score表，其主键是id
     @JsonIgnoreProperties(value = "student") //可以在查询的时候过滤不必查询的字段
     //@JsonManagedReference     //通过这种方式确保在双向关系中只有单个反向的实例被序列化(只能从主表向从表方向序列化)
     private Score score;

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cn.connext.project.basic.repository.relationMybatis.ManyToOne.TeacherBatisRepository">
+<mapper namespace="com.cn.connext.project.ibatisbasic.repository.TeacherRepository">
     <resultMap type="Teacher" id="teacherMap">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <!-- 多对一的关系 -->
         <!-- property: 指的是属性的值, javaType：指的是属性的类型-->
-        <association property="grade" javaType="Grade">
-            <id column="id" property="id"/>
-            <result column="name" property="name"/>
+        <association property="grade" javaType="Grade" column="grade_id">
+            <id column="g_id" property="id"/>
+            <result column="g_name" property="name"/>
         </association>
     </resultMap>
 
 
     <select id="findAll"  resultMap="teacherMap">
-        select * FROM teacher
+        select t.id,t.name,g.id AS g_id,g.name AS g_name FROM teacher t INNER JOIN grade g on t.grade_id=g.id
     </select>
 </mapper>
