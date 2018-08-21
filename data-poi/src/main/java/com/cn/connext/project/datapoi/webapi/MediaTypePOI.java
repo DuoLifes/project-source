@@ -2,13 +2,17 @@ package com.cn.connext.project.datapoi.webapi;
 
 import com.cn.connext.project.datapoi.excelUtil.ImportUtil;
 import com.cn.connext.project.datapoi.excelUtil.ExportUtil;
+import com.cn.connext.project.datapoi.service.MediaLeadSourceService;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -20,6 +24,8 @@ public class MediaTypePOI {
     private ExportUtil exportUtil;
     @Resource
     private ImportUtil importUtil;
+    @Resource
+    private MediaLeadSourceService mediaLeadSourceService;
 
     //基本数据导出至文档
     @GetMapping("/export")
@@ -76,7 +82,18 @@ public class MediaTypePOI {
     }
 
     //从es导出至文档
+    @GetMapping("/exportByEs")
     public void exportByEs(){
-        String filename="";
+        try {
+            String filename="d:\\测试ES导出工作簿.xlsx";
+            File file = new File(filename);
+            FileOutputStream outputStream = new FileOutputStream(file);
+            QueryBuilder queryBuilder=null;
+            outputStream=mediaLeadSourceService.exportByEs(queryBuilder,outputStream);
+            outputStream.flush();
+            outputStream.close();
+        }catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 }
