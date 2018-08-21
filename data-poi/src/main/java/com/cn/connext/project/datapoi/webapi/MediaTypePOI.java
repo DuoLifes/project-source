@@ -1,7 +1,7 @@
 package com.cn.connext.project.datapoi.webapi;
 
-import com.cn.connext.project.datapoi.excelUtil.ExportUtil;
 import com.cn.connext.project.datapoi.excelUtil.ImportUtil;
+import com.cn.connext.project.datapoi.excelUtil.ExportUtil;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -17,13 +17,13 @@ import java.io.FileOutputStream;
 public class MediaTypePOI {
 
     @Resource
-    private ImportUtil importUtil;
-    @Resource
     private ExportUtil exportUtil;
+    @Resource
+    private ImportUtil importUtil;
 
-    //基本导出文档
-    @GetMapping("/import")
-    public void impot() {
+    //基本数据导出至文档
+    @GetMapping("/export")
+    public void export() {
         try {
             //创建工作簿
             XSSFWorkbook workbook = new XSSFWorkbook();
@@ -43,9 +43,9 @@ public class MediaTypePOI {
         }
     }
 
-    //基本导入文档
-    @GetMapping("/export")
-    public void export() {
+    //从文档导出数据
+    @GetMapping("/import")
+    public void imports() {
         try {
             FileInputStream inputStream = new FileInputStream("d:\\工作簿.xlsx");
             //将输入流转换为workbook
@@ -63,17 +63,20 @@ public class MediaTypePOI {
         }
     }
 
-
-
     //从数据库导出数据到文档
-    @GetMapping("/importMediaType")
-    public void importMediaType() {
-        importUtil.importMediaType();
-    }
-
-    //文档导入数据库
     @GetMapping("/exportMediaType")
     public void exportMediaType() {
         exportUtil.exportMediaType();
+    }
+
+    //文档导入数据库
+    @GetMapping("/importsMediaType")
+    public void importsMediaType() {
+        importUtil.importMediaType();
+    }
+
+    //从es导出至文档
+    public void exportByEs(){
+        String filename="";
     }
 }
