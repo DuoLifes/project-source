@@ -40,3 +40,5 @@ devops:
 data-poi:
     1.数据导出至Excel,Excel导入数据库。
     2.引入poi依赖。
+    3.整合elasticsearch,把数据导入.csv格式的文件，以“,”分割,然后再转.xlsx格式文件，这就省略了将数据封装在一个个单元格内的步骤。
+    4.文件上传功能:需要引入spring-test-4.1.4.RELEASE.JAR包,t

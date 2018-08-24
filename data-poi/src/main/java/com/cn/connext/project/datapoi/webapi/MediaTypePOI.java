@@ -8,8 +8,9 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
 import java.io.File;
@@ -24,6 +25,12 @@ public class MediaTypePOI {
     private ExportUtil exportUtil;
     @Resource
     private ImportUtil importUtil;
+    //文档导出路径
+    @Value("${project-source.data-poi.exportUrl}")
+    private String exportUrl;
+    //文件上传路径
+    @Value("${project-source.data-poi.uploadPath}")
+    private String uploadPath;
     @Resource
     private MediaLeadSourceService mediaLeadSourceService;
 
@@ -85,15 +92,31 @@ public class MediaTypePOI {
     @GetMapping("/exportByEs")
     public void exportByEs(){
         try {
-            String filename="d:\\测试ES导出工作簿.xlsx";
-            File file = new File(filename);
+            String filename="测试ES导出工作簿.csv";
+            String url=exportUrl+filename;
+            File file = new File(url);
             FileOutputStream outputStream = new FileOutputStream(file);
-            QueryBuilder queryBuilder=null;
-            outputStream=mediaLeadSourceService.exportByEs(queryBuilder,outputStream);
+            outputStream=mediaLeadSourceService.exportByEs(outputStream);
             outputStream.flush();
             outputStream.close();
         }catch (Exception e){
             System.out.println(e.toString());
+        }
+    }
+
+    //上传文件
+    @GetMapping("/upload")
+    public void upload(){
+        String filename="测试ES导出工作簿.csv";
+        String url=exportUrl+filename;
+        //要上传的文件路径
+        File file = new File(url);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            MultipartFile multipartFile = new MockMultipartFile("file", fileInputStream);
+            mediaLeadSourceService.upload(multipartFile,filename,uploadPath);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 }

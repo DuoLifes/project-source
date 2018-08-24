@@ -11,6 +11,10 @@ es:
   cluster_name: elasticsearch
   cluster_nodes: localhost:9300
 
+project-source:
+  data-poi:
+    exportUrl: D:\\
+    uploadPath: C:\\
 
 spring:
   jackson:
