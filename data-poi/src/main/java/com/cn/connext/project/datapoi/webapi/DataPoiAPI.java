@@ -2,13 +2,16 @@ package com.cn.connext.project.datapoi.webapi;
 
 import com.cn.connext.project.datapoi.excelUtil.ImportUtil;
 import com.cn.connext.project.datapoi.excelUtil.ExportUtil;
-import com.cn.connext.project.datapoi.service.MediaLeadSourceService;
+import com.cn.connext.project.datapoi.service.DataPoiService;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +21,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 
-@WebAPI("/api/data-poi/mediaTypePoi")
-public class MediaTypePOI {
+@WebAPI("/api/data-poi/dataPoi")
+public class DataPoiAPI {
 
     @Resource
     private ExportUtil exportUtil;
@@ -32,7 +35,7 @@ public class MediaTypePOI {
     @Value("${project-source.data-poi.uploadPath}")
     private String uploadPath;
     @Resource
-    private MediaLeadSourceService mediaLeadSourceService;
+    private DataPoiService dataPoiService;
 
     //基本数据导出至文档
     @GetMapping("/export")
@@ -96,7 +99,7 @@ public class MediaTypePOI {
             String url=exportUrl+filename;
             File file = new File(url);
             FileOutputStream outputStream = new FileOutputStream(file);
-            outputStream=mediaLeadSourceService.exportByEs(outputStream);
+            outputStream=dataPoiService.exportByEs(outputStream);
             outputStream.flush();
             outputStream.close();
         }catch (Exception e){
@@ -107,6 +110,7 @@ public class MediaTypePOI {
     //上传文件
     @GetMapping("/upload")
     public void upload(){
+        //@RequestPart("file") MultipartFile postFile 前端传参用此注解接收
         String filename="测试ES导出工作簿.csv";
         String url=exportUrl+filename;
         //要上传的文件路径
@@ -114,9 +118,21 @@ public class MediaTypePOI {
         try {
             FileInputStream fileInputStream = new FileInputStream(file);
             MultipartFile multipartFile = new MockMultipartFile("file", fileInputStream);
-            mediaLeadSourceService.upload(multipartFile,filename,uploadPath);
+            dataPoiService.upload(multipartFile,filename,uploadPath);
         }catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    //上传图片
+    @PostMapping(value = "/image")
+    public String uploadImage(@RequestPart("file") MultipartFile postFile) {
+        return dataPoiService.savePostFile(postFile);
+    }
+
+    //远程文件上传
+    @PostMapping(value = "/RemoteFile")
+    public String captureImage(@RequestParam String url) {
+        return dataPoiService.saveRemoteFile(url);
     }
 }

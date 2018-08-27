@@ -2,7 +2,6 @@ package com.cn.connext.project.datapoi.webapi;
 
 import com.cn.connext.project.datapoi.entity.MediaType;
 import com.cn.connext.project.datapoi.service.MediaTypeService;
-import com.cn.connext.project.framework.annotation.QueryInfo;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import com.cn.connext.project.framework.query.QueryBuilder;
 import org.springframework.data.domain.Page;
