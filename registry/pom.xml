@@ -10,7 +10,7 @@
 
 
 	<artifactId>registry</artifactId>
-
+	<!--注册中心-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
