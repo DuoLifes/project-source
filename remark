@@ -41,4 +41,6 @@ data-poi:
     1.数据导出至Excel,Excel导入数据库。
     2.引入poi依赖。
     3.整合elasticsearch,把数据导入.csv格式的文件，以“,”分割,然后再转.xlsx格式文件，这就省略了将数据封装在一个个单元格内的步骤。
-    4.文件上传功能:需要引入spring-test-4.1.4.RELEASE.JAR包,t
+    4.文件上传功能:需要引入spring-test-4.1.4.RELEASE.JAR包,测试类就无法使用以前testJAR包了
+    5.图片上传:图片名用MD5加密,使用@RequestPart("file") MultipartFile postFile注解传参文件，用postman的POST方式选择上传的图片。
+    6.使用@Value("${}")注解读取.yml文件内的配置,这里用来读取文件上传默认的路径。
