@@ -34,7 +34,6 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     @Value("${spring.redis.database}")
     private int database;
-
 // 默认密码为空，若本地配置密码需放开注释
 //    @Value("${spring.redis.password}")
 //    private String password;
