@@ -19,6 +19,31 @@ spring:
       date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
 
+   #============== kafka ===================
+   # 指定kafka 代理地址，可以多个
+  kafka:
+    bootstrap-servers: localhost:9092
+   #=============== provider  =======================
+    producer:
+      retries: 0
+   # 每次批量发送消息的数量
+      batch-size: 16384
+      buffer-memory: 33554432
+   # 指定消息key和消息体的编解码方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+   #=============== consumer  =======================
+   # 指定默认消费者group id
+    consumer:
+      group-id: test-consumer-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100
+   # 指定消息key和消息体的编解码方式
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+
   redis:
     database: 2 # Redis数据库索引（默认为0）
     host: localhost # Redis服务器地址
@@ -62,3 +87,7 @@ management:
   health:
     elasticsearch:
       enabled: false
+
+
+
+

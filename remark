@@ -23,6 +23,7 @@ portal:
     4.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
     5.通过Client调用Basic服务里partner的接口，注意先启动basic服务。
     6.Elasticsearch增删改查业务逻辑。注意索引的建立要设置字段数据类型。通过postman创建索引最方便。
+    7.SpringBoot整合Kafka,直接在yml全局配置文件里配置参数。
 
 
 multi-datasource:
@@ -49,4 +50,4 @@ data-poi:
 technology:
     1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，重试机制，连接池，ES。
     2.系统的学习和搭建SpringBoot项目，理解各注解作用，@Configuration注解类的作用（这里用ES的配置为例），.yml全局配置文件作用，重试机制的实现过程。
-
+    3.SpringBoot整合Kafka,在@Configuration注解配置类配置kafka生产者参数，通过调用kafkaTemplate的send方法发送message。
