@@ -11,7 +11,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Configuration
-public class SpringConfig {
+public class ESConfig {
     @Bean
     public TransportClient client() throws UnknownHostException {
         InetSocketTransportAddress node = new InetSocketTransportAddress(

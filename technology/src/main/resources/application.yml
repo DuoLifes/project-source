@@ -12,6 +12,13 @@ management:
     elasticsearch:
       enabled: false
 
+kafka:
+  brokers: localhost:9092
+  cahce: 4096
+  maxcahce: 40960
+  origina-leads: uatraw
+  follow-leads: uatupdate
+
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

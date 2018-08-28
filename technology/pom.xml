@@ -91,5 +91,10 @@
 			<artifactId>transport</artifactId>
 			<version>5.5.0</version>
 		</dependency>
+		<!--Kafka-->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
 	</dependencies>
 </project>
