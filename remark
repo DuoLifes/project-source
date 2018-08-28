@@ -2,7 +2,7 @@ basic:
     1.SpringBoot框架整合SpringCloud。
     2.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
     3.启动类无须注入事务层;配置文件yml要配置实体类路径;配置文件要配置Mybatis的Mapper映射路径;
-    注意:JPA和Mybatis事务层/业务逻辑层（repository/service）命名不能一样，否则也找不到路径。
+    注意:JPA和Mybatis事务层/业务逻辑层的实体类（repository/service）命名不能一样，否则也找不到路径。
     4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
     5.JPA按例查询;
     使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
@@ -44,3 +44,9 @@ data-poi:
     4.文件上传功能:需要引入spring-test-4.1.4.RELEASE.JAR包,测试类就无法使用以前testJAR包了
     5.图片上传:图片名用MD5加密,使用@RequestPart("file") MultipartFile postFile注解传参文件，用postman的POST方式选择上传的图片。
     6.使用@Value("${}")注解读取.yml文件内的配置,这里用来读取文件上传默认的路径。
+    7.四种定时任务实现方式。
+
+technology:
+    1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，重试机制，连接池，ES。
+    2.系统的学习和搭建SpringBoot项目，理解各注解作用，@Configuration注解类的作用（这里用ES的配置为例），.yml全局配置文件作用，重试机制的实现过程。
+
