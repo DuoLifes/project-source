@@ -1,23 +1,22 @@
 basic:
-    1.SpringBoot框架整合SpringCloud。
-    2.整合Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
-    3.启动类无须注入事务层;配置文件yml要配置实体类路径;配置文件要配置Mybatis的Mapper映射路径;
+    1.SpringBoot框架整合SpringCloud，Mysql,Jpa,Mybatis,RabbitMQ,缓存Cache。
+    2.启动类无须注入事务层;配置文件yml要配置实体类路径;配置文件要配置Mybatis的Mapper映射路径;
     注意:JPA和Mybatis事务层/业务逻辑层的实体类（repository/service）命名不能一样，否则也找不到路径。
-    4.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
-    5.JPA按例查询;
+    3.整合Mybatis各类查询方法，动态查询，分页查询，条件查询，分组查询。重点：mapper.xml文件中SQL的编写;动态查询接口层参数要加@Param注解。
+    4.JPA按例查询;
     使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
     对于非字符串属性的只能精确匹配，比如想查询在某个时间段内注册的用户信息，就不能通过Example来查询。
-    6.JPACriteria API动态查询。构建查询容器。
-    7.JPA双向一对一(一对多)关联注意定义好主表从表（维护/被维护端）,外键的注解要正确使用,数据库表外键名要与实体内定义外键名对应;级联删除要添加@Transactional进行事务管理
-    8.增加/修改只能从维护端指向被维护端，被维护端只能增加/修改自己。
+    5.JPACriteria API动态查询。构建查询容器。
+    6.JPA双向一对一(一对多)关联注意定义好主表从表（维护/被维护端）,外键的注解要正确使用,数据库表外键名要与实体内定义外键名对应;级联删除要添加@Transactional进行事务管理
+    7.增加/修改只能从维护端指向被维护端，被维护端只能增加/修改自己。
 
 ibatis-basic:
-    1.SpringBoot框架整合SpringCloud。
+    1.SpringBoot框架整合SpringCloud，Mybatis。
     2.SpringBoot整合Mybatis,测试mybatis一对多关联和多对一关联映射。
 
 
 portal:
-    1.SpringBoot框架整合SpringCloud
+    1.SpringBoot框架整合SpringCloud，Elasticsearch，RabbitMQ,Redis，kafka。
     2.整合Elasticsearch,RabbitMQ,Redis。
     3.注意Redis的配置需要通过config文件注入yml中的配置,默认本地Redis不需要密码,所以password要注释掉。
     4.注意引入Redis的JRA包依赖,Redis本地服务需要开启。
@@ -27,7 +26,7 @@ portal:
 
 
 multi-datasource:
-    1.SpringBoot框架整合SpringCloud.
+    1.SpringBoot框架整合SpringCloud,Mysql,SQLserver,MongoDB,Elasticsearch,RabbitMQ.
     2.多数据源配置，整合Mysql,SqlServer数据库，还可继续添加数据库，需要配置config。
     3.非关系型数据库整合es,mongoDB;mongoDB全套增删改查。
     4.注意启动类注入关系型数据库路径包,非关系型数据库的事务层路径。
@@ -45,9 +44,11 @@ data-poi:
     4.文件上传功能:需要引入spring-test-4.1.4.RELEASE.JAR包,测试类就无法使用以前testJAR包了
     5.图片上传:图片名用MD5加密,使用@RequestPart("file") MultipartFile postFile注解传参文件，用postman的POST方式选择上传的图片。
     6.使用@Value("${}")注解读取.yml文件内的配置,这里用来读取文件上传默认的路径。
-    7.四种定时任务实现方式。
+    7.四种定时任务实现方式。(正在研究编写)
 
 technology:
     1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，重试机制，连接池，ES。
     2.系统的学习和搭建SpringBoot项目，理解各注解作用，@Configuration注解类的作用（这里用ES的配置为例），.yml全局配置文件作用，重试机制的实现过程。
     3.SpringBoot整合Kafka,在@Configuration注解配置类配置kafka生产者参数，通过调用kafkaTemplate的send方法发送message。
+
+
