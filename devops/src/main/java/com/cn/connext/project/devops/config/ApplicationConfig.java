@@ -24,9 +24,15 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         staticResourceFolderList.add("views");
     }
 
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/api/devops/**");
+//    }
+
+    //对无业务逻辑的页面跳转操作作统一管理
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/login.htm");
+        registry.addViewController("/devops").setViewName("forward:/index.htm");//默认读取static包下的静态资源，如果再加一层包路径如下。例如:"forward:/view/index.htm"
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
         super.addViewControllers(registry);
     }
@@ -36,7 +42,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         // Resources without Spring Security. No cache control response headers.
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/")
-                .setCacheControl(CacheControl.noCache());
+                .setCacheControl(CacheControl.noCache());//http缓存
 
         staticResourceFolderList.forEach(folderName -> {
             registry.addResourceHandler("/" + folderName + "/**")

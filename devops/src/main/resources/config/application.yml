@@ -18,17 +18,3 @@ spring:
 
   mvc:
     static-path-pattern: /**
-
-  cloud:
-    loadbalancer:
-      retry:
-        enabled: true
-
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 3000
-        readTimeout: 120000
-
