@@ -15,6 +15,7 @@
 		<module>data-poi</module>
 		<module>devops</module>
 		<module>technology</module>
+		<module>qrcode</module>
 	</modules>
 
 	<parent>

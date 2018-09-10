@@ -1,0 +1,40 @@
+server:
+  port: 8508
+
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+
+ddmp: # 测试线索文件存放路径，生产环境不需要
+  qrcode:
+    qrcodeUrl: /data/ddmp/file/static/export/
+    serverFilePath: http://106.75.119.170:8080
+    postLeadsPost: http://106.75.119.170:2101
+    filePath: http://106.75.119.170:8080
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${db.host}:${db.port}/ddmp_basic?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${db.username}
+    password: ${db.password}
+    hikari:
+      pool-name: project-qrcode
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
