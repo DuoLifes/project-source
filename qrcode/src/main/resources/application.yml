@@ -7,13 +7,6 @@ db:
   username: root
   password: 123456
 
-ddmp: # 测试线索文件存放路径，生产环境不需要
-  qrcode:
-    qrcodeUrl: /data/ddmp/file/static/export/
-    serverFilePath: http://106.75.119.170:8080
-    postLeadsPost: http://106.75.119.170:2101
-    filePath: http://106.75.119.170:8080
-
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -38,3 +31,10 @@ spring:
       prepStmtCacheSize: 250
       prepStmtCacheSqlLimit: 2048
       useServerPrepStmts: true
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 45000

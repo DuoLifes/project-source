@@ -1,9 +1,9 @@
 package com.cn.connext.project.qrcode;
 
+import com.cn.connext.project.framework.annotation.ConnextMicroServiceApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@ConnextMicroServiceApplication
 public class QrcodeApplication {
 
 	public static void main(String[] args) {
