@@ -1,6 +1,5 @@
 package com.cn.connext.project.qrcode.qrcodeUtil;
 
-import com.cn.connext.project.framework.exception.ServiceException;
 import com.cn.connext.project.qrcode.cache.FileCache;
 import com.cn.connext.project.qrcode.entity.QRCodeParams;
 import com.google.zxing.BarcodeFormat;
