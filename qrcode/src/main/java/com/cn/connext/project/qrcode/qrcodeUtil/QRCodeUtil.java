@@ -13,7 +13,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import java.awt.*;
