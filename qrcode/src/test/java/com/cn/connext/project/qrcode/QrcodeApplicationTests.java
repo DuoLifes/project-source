@@ -1,7 +1,15 @@
 package com.cn.connext.project.qrcode;
 
+import com.alibaba.fastjson.JSONObject;
 import com.cn.connext.project.qrcode.demo.MatrixToImageWriter;
 import com.cn.connext.project.qrcode.demo.QRCodeUtil;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,6 +80,29 @@ public class QrcodeApplicationTests {
 			String qRcode=QRCodeUtil.decode(file);
 			System.out.println("qRcode=="+qRcode);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test05() {
+		String APPID="wx0ede6a51a216c27a";
+		String APPSECRET="62a0aeec6c1bc91f04fc53b936765ad5";
+		String ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+		String url = ACCESS_TOKEN_URL.replace("APPID", APPID).replace("APPSECRET", APPSECRET);
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(url);
+		JSONObject jsonObject = null;
+		try {
+			HttpResponse response = httpClient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				String result = EntityUtils.toString(entity, "UTF-8");
+				jsonObject = JSONObject.parseObject(result);
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
