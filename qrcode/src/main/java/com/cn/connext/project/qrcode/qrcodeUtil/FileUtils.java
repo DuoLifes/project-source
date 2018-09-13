@@ -19,8 +19,7 @@ public class FileUtils {
     // 通过get请求得到读取器响应数据的数据流
     public static InputStream getInputStreamByGet(String url) {
         try {
-            HttpURLConnection conn = (HttpURLConnection) new URL(url)
-                    .openConnection();
+            HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setReadTimeout(5000);
             conn.setConnectTimeout(5000);
             conn.setRequestMethod("GET");

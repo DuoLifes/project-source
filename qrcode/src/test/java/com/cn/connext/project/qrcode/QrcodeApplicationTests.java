@@ -32,8 +32,8 @@ public class QrcodeApplicationTests {
 			Map hints = new HashMap();
 			hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 			BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400,hints);
-			File file1 = new File(path,"01.jpg");
-			MatrixToImageWriter.writeToFile(bitMatrix, "jpg", file1);
+			File file = new File(path,"01.jpg");
+			MatrixToImageWriter.writeToFile(bitMatrix, "jpg", file);
 		} catch (WriterException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

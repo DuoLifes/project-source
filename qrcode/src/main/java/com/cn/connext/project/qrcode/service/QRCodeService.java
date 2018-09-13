@@ -6,7 +6,6 @@ import com.cn.connext.project.qrcode.qrcodeUtil.QRParamsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
@@ -22,10 +21,13 @@ public class QRCodeService {
      */
     private final static Logger logger = LoggerFactory.getLogger(QRCodeService.class);
 
-    //上传文件及生成二维码的路径前缀
-    private final static String filePath = "D:\\file";
-//    //上传文件及生成二维码的显示地址
-//    private final static String fileShowPath = "/static/images/";
+    //二维码路径
+    private final static String filePath = "D:/image/";
+
+    private final static String logoPath="http://localhost:8508/test.jpg";
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    String nowDate = formatter.format(new Date());
 
     @Resource
     private QRCodeUtil qrCodeUtil;
@@ -38,71 +40,61 @@ public class QRCodeService {
      */
     @Transactional
     public Map<String, Object> createQrCode(QRCodeParams qrCodeParams) {
+        //返回报文
         Map<String,Object> resMap = new HashMap<>();
         String resUrls = "";
+        //获取链接内容
         String[] split = qrCodeParams.getContent();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String nowDate = formatter.format(new Date());
-        String uuid = "";
-        if (qrCodeParams.getContent()[0].indexOf("qrCode")>0){
-            uuid = qrCodeParams.getContent()[0].substring(qrCodeParams.getContent()[0].indexOf("qrCode")+7,qrCodeParams.getContent()[0].length());
-        }
+        //设置前/背景色
         qrCodeParams.setOnColor(qrCodeParams.getOnColor().replace("#",""));
         qrCodeParams.setOffColor(qrCodeParams.getOffColor().replace("#",""));
+        if(qrCodeParams.getOnColor().equals("")){
+            qrCodeParams.setOnColor("000000");
+        }
+        if(qrCodeParams.getOffColor().equals("")){
+            qrCodeParams.setOffColor("FFFFFF");
+        }
+        //设置二维码图片名
         for(int i = 0;i < split.length;i++){
             String fileName = "";
             if(qrCodeParams.getImgType().equals("0")){
                 if(isChinese(split[i])){
-                    fileName = "other-"+String.valueOf(System.currentTimeMillis())+".jpg";
+                    fileName = nowDate+".jpg";
                 } else {
-                    fileName = split[i] + "-"+qrCodeParams.getApplyScope()+"-"+nowDate+".jpg";
+                    fileName = qrCodeParams.getApplyScope()+nowDate+".jpg";
                 }
             } else {
                 if(isChinese(split[i])){
-                    fileName = "other-"+String.valueOf(System.currentTimeMillis())+".png";
+                    fileName = nowDate+".png";
                 } else {
-                    fileName = split[i] + "-"+qrCodeParams.getApplyScope()+"-"+nowDate+".png";
+                    fileName = qrCodeParams.getApplyScope()+nowDate+".png";
                 }
             }
-            qrCodeParams.setTxt(split[i]);
-            fileName="p.jpg";
-            qrCodeParams.setFileName(fileName);
-            qrCodeParams.setFilePath(filePath);
-
-            if(qrCodeParams.getOnColor().equals("")){
-                qrCodeParams.setOnColor("000000");
+            //是否插入logo
+            if(qrCodeParams.getInsertLogo()){
+                qrCodeParams.setLogoPath(logoPath);
             }
-            if(qrCodeParams.getOffColor().equals("")){
-                qrCodeParams.setOffColor("FFFFFF");
-            }
-
+            qrCodeParams.setTxt(split[i]);//二维码内容
+            qrCodeParams.setFileName(fileName);//二维码图片名称
+            qrCodeParams.setFilePath(filePath);//二维码图片存放路径
             try {
-                if (qrCodeParams.getExpiryDate() != null){
-                    qrCodeParams.getContent()[0] = qrCodeParams.getContent()[0]+"&expiryDate="+qrCodeParams.getExpiryDate().toString();
-                    qrCodeParams.setContent(qrCodeParams.getContent());
-                }
-                String x = qrCodeUtil.generateQRImage(qrCodeParams);
-
+                String qRcodeFileName = qrCodeUtil.generateQRImage(qrCodeParams);
                 if((i+1)==split.length){
-                    resUrls += x;
+                    resUrls += qRcodeFileName;
                 } else {
-                    resUrls += x;
+                    resUrls += qRcodeFileName;
                 }
-
-                //return fileShowPath+qrCodeParams.getFileName();
             } catch (QRParamsException e){
                 e.printStackTrace();
                 resMap.put("code","10002");
                 resMap.put("msg","二维码生成失败,请检查参数是否正确");
                 resMap.put("imgUrl","");
-                resMap.put("qrCode",uuid);
                 return resMap;
             }
         }
         resMap.put("code","10001");
         resMap.put("msg","二维码生成成功");
         resMap.put("imgUrl",resUrls);
-        resMap.put("qrCode",uuid);
         return resMap;
     }
 

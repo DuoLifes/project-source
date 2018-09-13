@@ -32,8 +32,6 @@ public class QRCodeUtil {
     @Resource
     private FileCache fileCache;
 
-    String qrcodeUrl= "D:\\file";
-
     private static int width = 300;              //二维码宽度
     private static int height = 300;             //二维码高度
     private static int onColor = 0xFF000000;     //前景色
@@ -49,29 +47,19 @@ public class QRCodeUtil {
      * @throws QRParamsException
      */
     public String generateQRImage(QRCodeParams params)throws QRParamsException{
-
-        if(params == null
-                || params.getFileName() == null
-                || params.getFilePath() == null
-                || params.getTxt() == null){
-
+        if(params == null|| params.getFileName() == null|| params.getFilePath() == null|| params.getTxt() == null){
             throw new QRParamsException("参数错误");
         }
         try{
+            //设置二维码属性
             initData(params);
-
-            String imgPath = params.getFilePath();
-            String imgName = params.getFileName();
-            String txt = params.getTxt();
-
-            String FilePath = qrcodeUrl;
-
+            //判断是否插入logo
             if(params.getLogoPath() != null && !"".equals(params.getLogoPath().trim())){
-                String x = generateQRImage(txt, params.getLogoPath(), FilePath, imgName, params.getSuffixName());
-                return x;
+                String qRcodeFileName = generateQRImage(params.getTxt(), params.getLogoPath(), params.getFilePath(), params.getFileName(), params.getSuffixName());
+                return qRcodeFileName;
             }else{
-                String x = generateQRImage(txt, FilePath, imgName, params.getSuffixName());
-                return x;
+                String qRcodeFileName = generateQRImage(params.getTxt(),params.getFilePath(), params.getFileName(), params.getSuffixName());
+                return qRcodeFileName;
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -81,6 +69,7 @@ public class QRCodeUtil {
 
     /*内部调用*/
     //####################################################################################################//
+    /*设置二维码属性:如果没传值则置默认值*/
     private static void initData(QRCodeParams params){
         if(params.getWidth() != null && !params.getWidth().equals("") && !params.getWidth().equals("null")){
             width = params.getWidth();
@@ -98,46 +87,44 @@ public class QRCodeUtil {
             level = params.getLevel();
         }
     }
-
     //####################################################################################################//
     /**
      * 生成带logo的二维码图片
      * @param txt          //二维码内容
      * @param logoPath     //logo绝对物理路径
-     * @param imgPath      //二维码保存绝对物理路径
-     * @param imgName      //二维码文件名称
+     * @param filrPath      //二维码保存绝对物理路径
+     * @param fileName      //二维码文件名称
      * @param suffix       //图片后缀名
      * @throws Exception
      */
-    public String generateQRImage(String txt, String logoPath, String imgPath, String imgName, String suffix) throws Exception{
-        File filePath = new File(imgPath);
-        if(!filePath.exists()){
-            filePath.mkdirs();
-        }
-        if(imgPath.endsWith("/")){
-            imgPath += imgName;
-        }else{
-            imgPath += "/"+imgName;
+    public String generateQRImage(String txt, String logoPath, String filrPath, String fileName, String suffix) throws Exception{
+        //如果二维码存放路径不存在则创建
+        File FilePath = new File(filrPath);
+        if(!FilePath.exists()){
+            FilePath.mkdirs();
         }
         Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         hints.put(EncodeHintType.ERROR_CORRECTION, level);
         hints.put(EncodeHintType.MARGIN, margin);  //设置白边
         BitMatrix bitMatrix = new MultiFormatWriter().encode(txt, BarcodeFormat.QR_CODE, width, height, hints);
-        File qrcodeFile = new File(imgPath);
-        writeToFile(bitMatrix, suffix, qrcodeFile, logoPath);
-        // File转换成MutipartFile
-//        File file = WebFileUtils.createFileByUrl(qrcodeFile.getPath(), "jpg");
-        FileInputStream inputStream = new FileInputStream(qrcodeFile);
-        MultipartFile multipartFile = new MockMultipartFile("file",imgName,"jpg",inputStream);
-        String x = fileCache.uploadImage(multipartFile);
-        qrcodeFile.delete();
-        return x;
+        //绘制二维码
+        BufferedImage image = toBufferedImage(bitMatrix);
+        //插入logo
+        writeToFile(image,logoPath);
+        //生成二维码图片
+        ImageIO.write(image, suffix, new File(filrPath+"/"+fileName));
+        // File转换成MutipartFile(上传二维码)
+        FileInputStream inputStream = new FileInputStream(filrPath+"/"+fileName);
+        MultipartFile multipartFile = new MockMultipartFile("file",fileName,"jpg",inputStream);
+        String qRcodeFileName = fileCache.uploadImage(multipartFile);
+        //qrcodeFile.delete();
+        return qRcodeFileName;
     }
     //####################################################################################################//
 
     /**
-     * 生成二维码
+     * 生成二维码(不带logo)
      * @param txt          //二维码内容
      * @param imgPath      //二维码保存物理路径
      * @param imgName      //二维码文件名称
@@ -162,58 +149,41 @@ public class QRCodeUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // File转换成MutipartFile
-//        File file = WebFileUtils.createFileByUrl(imageFile.getPath(), "jpg");
         FileInputStream inputStream = new FileInputStream(imageFile);
         //MockMultipartFile类型文件主要用于测试
         MultipartFile multipartFile = new MockMultipartFile("file",imgName,"jpg",inputStream);
-        String x = fileCache.uploadImage(multipartFile);
-        imageFile.delete();
-
-        return x;
+        String qRcodeFileName = fileCache.uploadImage(multipartFile);
+        //imageFile.delete();
+        return qRcodeFileName;
 
     }
-
     //####################################################################################################//
     /**
-     *
-     * @param matrix 二维码矩阵相关
-     * @param format 二维码图片格式
-     * @param file 二维码图片文件
      * @param logoPath logo路径
      * @throws IOException
      */
-    public static void writeToFile(BitMatrix matrix,String format,File file,String logoPath) throws IOException {
-
-        BufferedImage image = toBufferedImage(matrix);
-        Graphics2D gs = image.createGraphics();
-
-        int ratioWidth = image.getWidth()*2/10;
-        int ratioHeight = image.getHeight()*2/10;
+    public static void writeToFile(BufferedImage image,String logoPath) throws IOException {
         //载入logo
         Image img = ImageIO.read(FileUtils.getInputStreamByGet(logoPath));
+        int ratioWidth = image.getWidth()*2/10;
+        int ratioHeight = image.getHeight()*2/10;
         int logoWidth = img.getWidth(null)>ratioWidth?ratioWidth:img.getWidth(null);
         int logoHeight = img.getHeight(null)>ratioHeight?ratioHeight:img.getHeight(null);
-
+        //插入logo
+        Graphics2D gs = image.createGraphics();
         int x = (image.getWidth() - logoWidth) / 2;
         int y = (image.getHeight() - logoHeight) / 2;
-
         gs.drawImage(img, x, y, logoWidth, logoHeight, null);
         gs.setColor(Color.black);
         gs.setBackground(Color.WHITE);
         gs.dispose();
-        img.flush();
-        if(!ImageIO.write(image, format, file)){
-            throw new IOException("Could not write an image of format " + format + " to " + file);
-        }
     }
-
     //####################################################################################################//
+    //绘制二维码
     public static BufferedImage toBufferedImage(BitMatrix matrix){
         int width = matrix.getWidth();
         int height = matrix.getHeight();
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
         for(int x=0;x<width;x++){
             for(int y=0;y<height;y++){
                 image.setRGB(x, y, matrix.get(x, y) ? onColor : offColor);
@@ -221,6 +191,5 @@ public class QRCodeUtil {
         }
         return image;
     }
-
     //####################################################################################################//
 }

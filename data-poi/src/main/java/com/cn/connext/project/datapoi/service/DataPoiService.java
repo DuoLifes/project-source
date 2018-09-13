@@ -27,8 +27,7 @@ public class DataPoiService {
     @Value("${project-source.data-poi.storagePath}")
     private String storagePath;
     //图片浏览URL
-    @Value("${project-source.data-poi.internetUrl}")
-    private String internetUrl;
+    private String internetUrl=storagePath;
 
     private static String DEFAULT_IMAGE_FORMAT = "jpg";
 
@@ -68,12 +67,10 @@ public class DataPoiService {
         if(postFile.getSize()<=0){
             throw new ServiceException("File_EMPTY_Error", "所要上传的文件不能为空。");
         }
-
         try {
             String fileName = FileUtils.getMd5FileName(postFile);
             FileUtils.prepareFolder(storagePath);
             FileUtils.safeSave(storagePath + fileName, postFile.getBytes());
-
             return internetUrl + fileName;
         } catch (Exception e) {
             System.out.println(e);

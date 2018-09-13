@@ -24,6 +24,15 @@ public class QRCodeParams {
     private Date expiryDate;
     private String[] content;
     private String page;
+    private Boolean insertLogo;
+
+    public Boolean getInsertLogo() {
+        return insertLogo;
+    }
+
+    public void setInsertLogo(Boolean insertLogo) {
+        this.insertLogo = insertLogo;
+    }
 
     public String[] getContent() {
         return content;

@@ -15,8 +15,8 @@ project-source:
   data-poi:
     exportUrl: D:\\
     uploadPath: C:\\
-    storagePath: C:\\
-    internetUrl: /static/images/         # 图片浏览URL
+    storagePath: D:\\
+
 
 spring:
   jackson:
