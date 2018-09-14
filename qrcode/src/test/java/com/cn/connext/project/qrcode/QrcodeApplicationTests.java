@@ -3,6 +3,7 @@ package com.cn.connext.project.qrcode;
 import com.alibaba.fastjson.JSONObject;
 import com.cn.connext.project.qrcode.demo.MatrixToImageWriter;
 import com.cn.connext.project.qrcode.demo.QRCodeUtil;
+import com.cn.connext.project.qrcode.qrcodeUtil.WeixinUtil;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -14,10 +15,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.zxing.BarcodeFormat;
@@ -25,6 +26,8 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
+import javax.annotation.Resource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -84,26 +87,33 @@ public class QrcodeApplicationTests {
 		}
 	}
 
+
+
+	/*生成微信测试二维码
+	* 根据appid和secret先获取access_token
+	* 以上两个参数用测试微信公众号获取:
+	* 地址:https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index
+	* */
+	@Resource
+	private WeixinUtil weixinUtil;
 	@Test
-	public void test05() {
-		String APPID="wx0ede6a51a216c27a";
-		String APPSECRET="62a0aeec6c1bc91f04fc53b936765ad5";
-		String ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
-		String url = ACCESS_TOKEN_URL.replace("APPID", APPID).replace("APPSECRET", APPSECRET);
-		HttpClient httpClient = HttpClients.createDefault();
-		HttpGet httpGet = new HttpGet(url);
-		JSONObject jsonObject = null;
+	public void test06() {
+		//用access_token获取ticket
+		String qrCodeTicket = weixinUtil.getQrcodeTicket("13_0_BCTACkly6KnAQQGpktV2ME31Banrqo2YJJ5B66sPYZeuxR13TipEwFM-A6ZY36AybCrEgWHPml8wSSccUFkDF5Gre0ax8XxUGVscpLByLhjGsF9ASSJOeBiq9FmG0fxV3oxV9Wbu6WIk6mMINeAJAYUZ");
 		try {
-			HttpResponse response = httpClient.execute(httpGet);
-			HttpEntity entity = response.getEntity();
-			if (entity != null) {
-				String result = EntityUtils.toString(entity, "UTF-8");
-				jsonObject = JSONObject.parseObject(result);
+			URL url = new URL(qrCodeTicket);
+			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+			File file = new File("D:/wechatqrcode/wechat.jpg");
+			BufferedInputStream bis = new BufferedInputStream(httpURLConnection.getInputStream());
+			OutputStream os = new FileOutputStream(file);
+			int len;
+			byte[] arr = new byte[1024];
+			while ((len = bis.read(arr)) != -1) {
+				os.write(arr, 0, len);
+				os.flush();
 			}
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		}catch (Exception e){
+			System.out.println(e.toString());
 		}
 	}
 }
