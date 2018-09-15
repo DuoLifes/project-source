@@ -27,7 +27,7 @@ public class WeixinUtil {
 	//根据ticket换取qrcode
 	private static final String GET_QRCODE_URL="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=TICKET";
 	//小程序二维码
-	private static final String GET_QRCODES_URL="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN";
+	public String GET_QRCODES_URL="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=ACCESS_TOKEN";
 
 	/**
 	 *
@@ -127,8 +127,10 @@ public class WeixinUtil {
 		String url = GET_QRCODES_URL.replace("ACCESS_TOKEN",token);
 		JSONObject jsonObject = doPostStr(url,"{\"scene\": \"123\", \"page\": \"page/newCar/carInfo/carFrom\"}");
 		if(jsonObject!=null){
+			result = jsonObject.getString("ticket");
 			logger.info(jsonObject.toString());
 		}
-		return result;
+		String qrcodeUrl = GET_QRCODES_URL.replace("TICKET",result);
+		return qrcodeUrl;
 	}
 }

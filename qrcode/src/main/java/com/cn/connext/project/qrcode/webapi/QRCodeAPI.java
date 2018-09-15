@@ -3,6 +3,7 @@ package com.cn.connext.project.qrcode.webapi;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import com.cn.connext.project.qrcode.entity.QRCodeParams;
 import com.cn.connext.project.qrcode.service.QRCodeService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,7 +32,7 @@ public class QRCodeAPI {
     }
 
     /*生成二维码小程序*/
-    @PostMapping("/createProgramQrCode")
+    @GetMapping("/createProgramQrCode")
     public Map<String, Object> createProgramQrCode(@RequestParam(value = "imgType",required = false)String imgType,
                                                    @RequestParam(value = "width",required = false)String width,
                                                    @RequestParam(value = "page",required = false)String page,

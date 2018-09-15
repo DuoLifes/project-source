@@ -168,15 +168,15 @@ public class QRCodeService {
             tokenCache.clear(appId);
             return resMap;
         }
-        //根据acsess_token获取ticket
-        String qrCodeTicket = weixinUtil.getQrcodeTicket(String.valueOf(tokenMap.get("token")));
-        logger.info("qrCodeUrl:"+qrCodeTicket);
         String fileName = "";
         if(imgType.equals("0")){
             fileName = "wechat-"+nowDate+".jpg";
         } else {
             fileName = "wechat-"+nowDate+".png";
         }
+        //根据acsess_token获取ticket
+        String qrCodeTicket = weixinUtil.getQrcodeTicket(String.valueOf(tokenMap.get("token")));
+        logger.info("qrCodeUrl:"+qrCodeTicket);
         try {
             //根据ticket换取二维码
             URL url = new URL(qrCodeTicket);
@@ -242,9 +242,8 @@ public class QRCodeService {
         } else {
             fileName = "wechat-"+nowDate+".png";
         }
-
         try {
-            URL url = new URL(GET_QRCODES_URL.replace("ACCESS_TOKEN", String.valueOf(tokenMap.get("token"))));
+            URL url = new URL(weixinUtil.GET_QRCODES_URL.replace("ACCESS_TOKEN", String.valueOf(tokenMap.get("token"))));
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setRequestMethod("POST");// 提交模式
             // conn.setConnectTimeout(10000);//连接超时 单位毫秒
@@ -254,65 +253,24 @@ public class QRCodeService {
             httpURLConnection.setDoInput(true);
             // 获取URLConnection对象对应的输出流
             PrintWriter printWriter = new PrintWriter(httpURLConnection.getOutputStream());
-            // 发送请求参数
-            JSONObject paramJson = new JSONObject();
-            paramJson.put("scene", "123");
-            //判断是否填写跳转路径，如果没填，不传当前字段，默认跳转到首页
-            if (page != null || !page.equals("null") || !page.equals("")) {
-                paramJson.put("page", page);
-            }
-            paramJson.put("width", width);
-            paramJson.put("auto_color", false);
-
-            //line_color生效
-            paramJson.put("auto_color", false);
-            JSONObject lineColor = new JSONObject();
-            lineColor.put("r", 0);
-            lineColor.put("g", 0);
-            lineColor.put("b", 0);
-            paramJson.put("line_color", lineColor);
-
-            printWriter.write(paramJson.toString());
-            // flush输出流的缓冲
-            printWriter.flush();
-            //开始获取数据
-            try {
-                JSONObject jsonObject1 = null;
-                HttpClient httpClient = HttpClients.createDefault();
-                HttpPost httpPost = new HttpPost(GET_QRCODES_URL.replace("ACCESS_TOKEN", String.valueOf(tokenMap.get("token"))));
-                httpPost.setEntity(new StringEntity(paramJson.toString(), "UTF-8"));
-                HttpResponse response = httpClient.execute(httpPost);
-                String result = EntityUtils.toString(response.getEntity(), "UTF-8");
-                jsonObject1 = JSONObject.parseObject(result);
-                logger.info(jsonObject1.toString());
-                resMap.put("code", jsonObject1.get("errcode"));
-                resMap.put("msg", "参数错误，请检查");
-                resMap.put("imgUrl", "");
-                return resMap;
-            } catch (Exception e) {
-
-            }
-            File file = new File(qrcodeUrl + fileName);
-
+            File file = new File(filePath+fileName);
             BufferedInputStream bis = new BufferedInputStream(httpURLConnection.getInputStream());
             OutputStream os = new FileOutputStream(file);
-
             int len;
             byte[] arr = new byte[1024];
             while ((len = bis.read(arr)) != -1) {
                 os.write(arr, 0, len);
                 os.flush();
             }
-            FileInputStream inputStream = new FileInputStream(file);
-            MultipartFile multipartFile = new MockMultipartFile("file", fileName, "jpg", inputStream);
-            String x = fileCache.uploadImage(multipartFile);
-            file.delete();
-
+            // File转换成MutipartFile(上传二维码)
+            FileInputStream inputStream = new FileInputStream(filePath+"/"+fileName);
+            MultipartFile multipartFile = new MockMultipartFile("file",fileName,"jpg",inputStream);
+            String qRcodeFileName = fileCache.uploadImage(multipartFile);
+            //file.delete();
             os.close();
-
             resMap.put("code", "10001");
             resMap.put("msg", "二维码生成成功");
-            resMap.put("imgUrl", x);
+            resMap.put("imgUrl", qRcodeFileName);
             return resMap;
         } catch (Exception e) {
             e.printStackTrace();
