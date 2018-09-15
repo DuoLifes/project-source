@@ -1,46 +1,47 @@
 package com.cn.connext.project.startelasticsearch;
 
+import org.elasticsearch.client.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import java.text.MessageFormat;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.UnknownHostException;
+@Configuration
+@ConditionalOnClass({Client.class, TransportClient.class})
+@ConditionalOnProperty(prefix = "es", name = "enabled", havingValue = "true", matchIfMissing = true)
+public class ElasticSearchConfig implements DisposableBean {
+    private final Logger logger = LoggerFactory.getLogger(ElasticSearchConfig.class);
+    private final TransportClient transportClient;
 
-@Component
-public class ElasticSearchConfig {
-    @Autowired
-    private ElasticSearchConfigurationProperties properties;
+    public ElasticSearchConfig(ElasticSearchConfigurationProperties properties) {
+        long beginTime = System.currentTimeMillis();
+
+        transportClient = new PreBuiltTransportClient(Settings.builder().put("cluster.name", properties.getCluster_name()).build());
+        properties.getTransportAddresses().forEach(transportClient::addTransportAddress);
+
+        logger.info(MessageFormat.format(
+                "Started initialize ElasticSearch cluster client in {0}ms, nodes count: {1}",
+                System.currentTimeMillis() - beginTime,
+                transportClient.connectedNodes().size()));
+    }
 
     @Bean
-    public TransportClient client() {
-        TransportClient client = new PreBuiltTransportClient(settings());
-        client.addTransportAddress(transportAddress());
-        return client;
+    public TransportClient getTransportClient() {
+        return this.transportClient;
     }
 
-    private Settings settings() {
-        return Settings.builder().put("cluster.name", properties.getCluster_name()) //设置ES实例的名称my-application
-                //.put("client.transport.sniff", true) //自动嗅探整个集群的状态，把集群中其他ES节点的ip添加到本地的客户端列表中
-                .build();
+
+    @Override
+    public void destroy() throws Exception {
+        logger.info("Closing ElasticSearch cluster client");
+        transportClient.close();
     }
 
-    private TransportAddress transportAddress() {
-        String[] host = properties.getCluster_nodes().split(":");
-        Integer port = Integer.parseInt(host[1]);
-        try {
-            InetAddress address = InetAddress.getByName(host[0]);//106.75.119.31 getByName("192.168.56.102");
-            InetSocketAddress ip = new InetSocketAddress(address, port);
-            return new InetSocketTransportAddress(ip);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

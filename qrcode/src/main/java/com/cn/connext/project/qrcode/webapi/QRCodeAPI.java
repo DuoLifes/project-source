@@ -29,4 +29,14 @@ public class QRCodeAPI {
                                                   @RequestParam(value = "appSecret")String appSecret) {
         return qrCodeService.createWeChatQrCode(appId,appSecret,imgType);
     }
+
+    /*生成二维码小程序*/
+    @PostMapping("/createProgramQrCode")
+    public Map<String, Object> createProgramQrCode(@RequestParam(value = "imgType",required = false)String imgType,
+                                                   @RequestParam(value = "width",required = false)String width,
+                                                   @RequestParam(value = "page",required = false)String page,
+                                                   @RequestParam(value = "appId",required = false)String appId,
+                                                   @RequestParam(value = "appSecret",required = false)String appSecret) {
+        return qrCodeService.createProgramQrCode(imgType,width,page,appId,appSecret);
+    }
 }
