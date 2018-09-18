@@ -1,6 +1,6 @@
 package com.cn.connext.project.technology.config;
 
-import com.cn.connext.project.technology.entity.Asynchronous;
+//import com.cn.connext.project.technology.entity.Asynchronous;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -31,16 +31,16 @@ public class ScheduledConfig{
 //        j++;
 //    }
 
-    @Resource
-    private Asynchronous asynchronous;
-
-    int k=1;
-    @Scheduled(cron="0/100 * *  * * ? ")  //100秒执行一次
-    public void Scheduled3 () throws ParseException {
-        for(int i=1;i<=10;i++){
-            asynchronous.test(i);
-            logger.info("第"+k+"次定时任务"+"第"+i+"次执行完毕!");
-        }
-        k++;
-    }
+//    @Resource
+//    private Asynchronous asynchronous;
+//
+//    int k=1;
+//    @Scheduled(cron="0/100 * *  * * ? ")  //100秒执行一次
+//    public void Scheduled3 () throws ParseException {
+//        for(int i=1;i<=10;i++){
+//            asynchronous.test(i);
+//            logger.info("第"+k+"次定时任务"+"第"+i+"次执行完毕!");
+//        }
+//        k++;
+//    }
 }
