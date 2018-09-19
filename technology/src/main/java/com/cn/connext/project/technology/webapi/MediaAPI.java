@@ -1,10 +1,16 @@
 package com.cn.connext.project.technology.webapi;
 
 import com.cn.connext.project.framework.annotation.WebAPI;
+import com.cn.connext.project.framework.query.QueryBuilder;
 import com.cn.connext.project.technology.entity.Media;
 import com.cn.connext.project.technology.repository.MediaRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebAPI("/api/technology/media")
@@ -26,5 +32,24 @@ public class MediaAPI {
     @GetMapping("/findAll")
     public List<Media> findAll() {
         return mediaRepository.findAll();
+    }
+
+    @GetMapping("/sort")
+    public Page<Media> sortList(){
+        List<Sort.Order> orders=new ArrayList<Sort.Order>();
+        orders.add(new Sort.Order(Sort.Direction.ASC, "createIndex"));
+        Pageable pageable = new PageRequest(0, 20, new Sort(orders));
+        return mediaRepository.findAll(pageable);
+    }
+    @GetMapping("/sort1")
+    public List<Media> sortList1(){
+        List<Sort.Order> orders=new ArrayList<Sort.Order>();
+        orders.add(new Sort.Order(Sort.Direction.DESC, "createIndex"));
+        return mediaRepository.findAll(new Sort(orders));
+    }
+    @GetMapping("/sort2")
+    public List<Media> sortList2(){
+        Sort sort = new Sort(Sort.Direction.DESC,"createIndex");
+        return mediaRepository.findAll(sort);
     }
 }
