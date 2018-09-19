@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/basic/basic.iml" filepath="$PROJECT_DIR$/basic/basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-poi/data-poi.iml" filepath="$PROJECT_DIR$/data-poi/data-poi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/devops/devops.iml" filepath="$PROJECT_DIR$/devops/devops.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" filepath="$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/knowledge/knowledge.iml" filepath="$PROJECT_DIR$/knowledge/knowledge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multi-datasource/multi-datasource.iml" filepath="$PROJECT_DIR$/multi-datasource/multi-datasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/portal/portal.iml" filepath="$PROJECT_DIR$/portal/portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/project-source.iml" filepath="$PROJECT_DIR$/.idea/project-source.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qrcode/qrcode.iml" filepath="$PROJECT_DIR$/qrcode/qrcode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry/registry.iml" filepath="$PROJECT_DIR$/registry/registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/start-elasticsearch/start-elasticsearch.iml" filepath="$PROJECT_DIR$/start-elasticsearch/start-elasticsearch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/technology/technology.iml" filepath="$PROJECT_DIR$/technology/technology.iml" />
+    </modules>
+  </component>
+</project>

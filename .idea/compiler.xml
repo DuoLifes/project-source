@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="basic" />
+        <module name="common" />
+        <module name="data-poi" />
+        <module name="devops" />
+        <module name="framework" />
+        <module name="ibatis-basic" />
+        <module name="knowledge" />
+        <module name="multi-datasource" />
+        <module name="portal" />
+        <module name="qrcode" />
+        <module name="registry" />
+        <module name="start-elasticsearch" />
+        <module name="technology" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="basic" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="data-poi" target="1.8" />
+      <module name="devops" target="1.8" />
+      <module name="framework" target="1.8" />
+      <module name="ibatis-basic" target="1.8" />
+      <module name="knowledge" target="1.8" />
+      <module name="multi-datasource" target="1.8" />
+      <module name="portal" target="1.8" />
+      <module name="project-source" target="1.8" />
+      <module name="qrcode" target="1.8" />
+      <module name="registry" target="1.8" />
+      <module name="start-elasticsearch" target="1.8" />
+      <module name="technology" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

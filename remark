@@ -55,3 +55,6 @@ technology:
     6.异步方法配置在AsyncTaskConfig类中，同理可以将异步注解@EnableAsync注在启动类上，要执行的异步方法需要单独写在一个类中，不能写在调用其方法的类中，否则Spring无法扫描到。
     7.MediaAPI中测试了排序的方法，运用JPA的Sort排序。
 
+knowledge:
+    1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，连接池。
+    2.该服务用于学习；测试；研究一些零碎的知识点。

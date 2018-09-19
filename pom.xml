@@ -16,6 +16,7 @@
 		<module>devops</module>
 		<module>technology</module>
 		<module>qrcode</module>
+		<module>knowledge</module>
 	</modules>
 
 	<parent>
