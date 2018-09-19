@@ -47,8 +47,11 @@ data-poi:
     7.四种定时任务实现方式。(正在研究编写)
 
 technology:
-    1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，重试机制，连接池，ES。
+    1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，重试机制，连接池，ES，网络爬虫，方法异步调用，定时任务。
     2.系统的学习和搭建SpringBoot项目，理解各注解作用，@Configuration注解类的作用（这里用ES的配置为例），.yml全局配置文件作用，重试机制的实现过程。
     3.SpringBoot整合Kafka,在@Configuration注解配置类配置kafka生产者参数，通过调用kafkaTemplate的send方法发送message。
-
+    4.crawl目录存放网络爬虫的三个工具类，爬取的数据存放在CrawlData实体类中。
+    5.定时任务的配置在ScheduledConfig配置类中，通过@Configurable注解注入启动类中，添加@EnableScheduling注解扫描定时任务方法，也可以直接将该注解注在启动类上。
+    6.异步方法配置在AsyncTaskConfig类中，同理可以将异步注解@EnableAsync注在启动类上，要执行的异步方法需要单独写在一个类中，不能写在调用其方法的类中，否则Spring无法扫描到。
+    7.MediaAPI中测试了排序的方法，运用JPA的Sort排序。
 

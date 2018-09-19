@@ -34,6 +34,7 @@ public class MediaAPI {
         return mediaRepository.findAll();
     }
 
+    /*排序&分页*/
     @GetMapping("/sort")
     public Page<Media> sortList(){
         List<Sort.Order> orders=new ArrayList<Sort.Order>();
@@ -41,12 +42,15 @@ public class MediaAPI {
         Pageable pageable = new PageRequest(0, 20, new Sort(orders));
         return mediaRepository.findAll(pageable);
     }
+    /*添加多个字段排序*/
     @GetMapping("/sort1")
     public List<Media> sortList1(){
         List<Sort.Order> orders=new ArrayList<Sort.Order>();
         orders.add(new Sort.Order(Sort.Direction.DESC, "createIndex"));
+        orders.add(new Sort.Order(Sort.Direction.DESC, "updateTime"));
         return mediaRepository.findAll(new Sort(orders));
     }
+    /*排序*/
     @GetMapping("/sort2")
     public List<Media> sortList2(){
         Sort sort = new Sort(Sort.Direction.DESC,"createIndex");
