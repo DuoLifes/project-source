@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LoginAPI {
 
     @RequestMapping("/login")
-    @ResponseBody
-    public String login(String u){
-        System.out.println(u);
+    public String login(){
         return "login";
     }
 }
