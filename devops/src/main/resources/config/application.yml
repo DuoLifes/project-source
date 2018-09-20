@@ -6,15 +6,5 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-  resources:
-    static-locations: classpath:/static/
-    cache-period: 3600
-    chain:
-      enabled: true
-      strategy:
-        content:
-          enabled: true
-          paths: /css,/img,/js,/views
-
-  mvc:
-    static-path-pattern: /**
+  thymeleaf:
+     prefix: classpath:/static/view/
