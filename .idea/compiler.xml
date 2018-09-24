@@ -18,7 +18,7 @@
         <module name="qrcode" />
         <module name="registry" />
         <module name="start-elasticsearch" />
-        <module name="technology" />
+        <module name="technologys" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -35,7 +35,7 @@
       <module name="qrcode" target="1.8" />
       <module name="registry" target="1.8" />
       <module name="start-elasticsearch" target="1.8" />
-      <module name="technology" target="1.8" />
+      <module name="technologys" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
