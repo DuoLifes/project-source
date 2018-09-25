@@ -1,6 +1,7 @@
 package com.cn.connext.project.knowledge.webapi;
 
 import com.cn.connext.project.framework.annotation.WebAPI;
+import com.cn.connext.project.knowledge.domain.Genericity;
 import com.cn.connext.project.knowledge.entity.Media;
 import com.cn.connext.project.knowledge.service.MediaService;
 import org.slf4j.Logger;
@@ -32,6 +33,17 @@ public class MediaAPI {
     @GetMapping("/list")
     public List<Media> findList() {
         return mediaService.findList();
+    }
+
+
+    /*验证泛型的使用*/
+    @GetMapping("/genericity")
+    public List<Media> findAll(){
+        List<Media> list=mediaService.findList();
+        Genericity genericity=new Genericity();
+        /*把Media集合传入泛型类genericity中进行业务逻辑处理*/
+        genericity.list=list;
+        return genericity.toList();
     }
 }
 

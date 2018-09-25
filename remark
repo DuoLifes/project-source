@@ -60,5 +60,6 @@ knowledge:
     1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，连接池。
     2.该服务用于学习；测试；研究一些零碎的知识点。
     3SpringAOP.
+    4.泛型的使用
 
-    待研究：AOP;审计；通用属性；webservice;日志；echars;jar包作用
+    待研究：AOP;审计；webservice;日志；echars;jar包作用
