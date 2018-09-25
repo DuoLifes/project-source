@@ -56,9 +56,4 @@ public class MediaAPI {
         Sort sort = new Sort(Sort.Direction.DESC,"createIndex");
         return mediaRepository.findAll(sort);
     }
-    /*测试devops的jar包作用*/
-    @GetMapping("/devops")
-    public String print(){
-        return "输出结果2.";
-    }
 }
