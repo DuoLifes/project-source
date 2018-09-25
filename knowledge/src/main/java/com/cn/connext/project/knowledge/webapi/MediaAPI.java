@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 媒体信息 - WebAPI访问接口
@@ -44,6 +47,30 @@ public class MediaAPI {
         /*把Media集合传入泛型类genericity中进行业务逻辑处理*/
         genericity.list=list;
         return genericity.toList();
+    }
+
+    /*学习lamda表达式*/
+    @GetMapping("/lamda01")
+    public Hashtable<String, String> findMap01(){
+        Hashtable<String, String> hashtable = new Hashtable<>();
+        mediaService.findList().stream()
+                .filter(media -> media.getRemark()!=null)
+                .filter(media -> "AAA".equals(media.getRemark()))//两个filter过滤是并且的关系
+                .forEach(media ->hashtable.put(media.getId(),media.getRemark()));
+        return hashtable;
+    }
+    @GetMapping("/lamda02")
+    public Map<String, Media> findMap02(){
+        Map<String, Media> map = mediaService.findList().stream()
+                .collect(Collectors.toMap(o -> o.getId(),o -> o));
+        return map;
+    }
+    @GetMapping("/lamda03")
+    public long count(){
+        long count=mediaService.findList().stream()
+                .filter(media -> "SA".equals(media.getCode()))
+                .filter(media -> media.getCode().toString().length()>2).count();
+        return count;
     }
 }
 
