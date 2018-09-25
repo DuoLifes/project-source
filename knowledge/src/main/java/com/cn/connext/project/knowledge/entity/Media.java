@@ -190,5 +190,15 @@ public class Media {
     }
 
     //endregion
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":\"" + id +"\""+
+                "\"updateTime\":\"" + updateTime + "\""+
+                "\"isInvalid\":\"" + isInvalid + "\"" +
+                "\"createIndex\":\"" + createIndex + "\"" +
+                '}';
+    }
 }
 
