@@ -2,7 +2,9 @@ package com.cn.connext.project.technologys.webapi;
 
 import com.cn.connext.project.framework.annotation.WebAPI;
 import com.cn.connext.project.technologys.entity.Media;
+import com.cn.connext.project.technologys.entity.Orders;
 import com.cn.connext.project.technologys.repository.MediaRepository;
+import com.cn.connext.project.technologys.repository.OrderRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -55,5 +57,20 @@ public class MediaAPI {
     public List<Media> sortList2(){
         Sort sort = new Sort(Sort.Direction.DESC,"createIndex");
         return mediaRepository.findAll(sort);
+    }
+
+    @Resource
+    private OrderRepository orderRepository;
+    @GetMapping("/order")
+    public List<Orders> find(){
+        return orderRepository.findAll();
+    }
+
+    @GetMapping("/createOrder")
+    public Orders aa(){
+        Orders orders=new Orders();
+        orders.setId("003");
+        orders.setName("网络单");
+        return orderRepository.save(orders);
     }
 }

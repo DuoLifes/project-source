@@ -54,7 +54,7 @@ technologys:
     5.定时任务的配置在ScheduledConfig配置类中，通过@Configurable注解注入启动类中，添加@EnableScheduling注解扫描定时任务方法，也可以直接将该注解注在启动类上。
     6.异步方法配置在AsyncTaskConfig类中，同理可以将异步注解@EnableAsync注在启动类上，要执行的异步方法需要单独写在一个类中，不能写在调用其方法的类中，否则Spring无法扫描到。
     7.MediaAPI中测试了排序的方法，运用JPA的Sort排序。
-    8.自定义注解，枚举
+    8.自定义注解，枚举,实体通用属性继承;特定字段创建修改赋值（时间，创建者）
 
 knowledge:
     1.SpringBoot整合SpringCloud,MySQL，JPA,Web服务，连接池。
