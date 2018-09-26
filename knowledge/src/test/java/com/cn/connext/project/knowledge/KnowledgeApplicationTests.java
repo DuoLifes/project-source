@@ -75,4 +75,20 @@ public class KnowledgeApplicationTests {
 			}
 		}
 	}
+
+	@Test
+	public void test05(){
+		String str="abcdefg";
+		logger.info("str=="+str.charAt(2));
+	}
+
+	@Test
+	public void test06(){
+		try {
+			Media media = new Media();
+			Method method = media.getClass().getMethod("getId", null);
+		}catch (Exception e){
+			logger.info("e:"+e);
+		}
+	}
 }
