@@ -9,6 +9,7 @@
         <module name="basic" />
         <module name="common" />
         <module name="data-poi" />
+        <module name="demo" />
         <module name="devops" />
         <module name="framework" />
         <module name="ibatis-basic" />
@@ -25,6 +26,7 @@
       <module name="basic" target="1.8" />
       <module name="common" target="1.8" />
       <module name="data-poi" target="1.8" />
+      <module name="demo" target="1.8" />
       <module name="devops" target="1.8" />
       <module name="framework" target="1.8" />
       <module name="ibatis-basic" target="1.8" />

@@ -17,6 +17,7 @@
 		<module>technologys</module>
 		<module>qrcode</module>
 		<module>knowledge</module>
+		<module>demo</module>
 	</modules>
 
 	<parent>

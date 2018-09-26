@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/basic/basic.iml" filepath="$PROJECT_DIR$/basic/basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/data-poi/data-poi.iml" filepath="$PROJECT_DIR$/data-poi/data-poi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/devops/devops.iml" filepath="$PROJECT_DIR$/devops/devops.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" filepath="$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" />

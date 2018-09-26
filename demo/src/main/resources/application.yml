@@ -1,0 +1,35 @@
+server:
+  port: 8510
+
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        naming:
+          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  datasource:
+      hikari:
+        pool-name: project-multi-datasource
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+      mysql:
+        driverClassName: com.mysql.jdbc.Driver
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/ddmp_basic?useUnicode=true&characterEncoding=utf-8&useSSL=false
+        username: root
+        password: 123456
