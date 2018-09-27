@@ -121,16 +121,17 @@ public class DemoAPI {
     @Qualifier("mysqlEntityManagerFactory")
     private EntityManager em2;
     @GetMapping("/07")
-    public void test07(){
+    public List<Partner> test07(){
         String name="易车网";
-        List<Partner> list = em2.createNativeQuery("select * from partner where name like :name", "PartnerMapping")
+        //原生SQL查询
+        List<Partner> list = em2.createNativeQuery("select * from partner where name like :name", Partner.class)
+                //em2.createNativeQuery("select * from partner where name like :name", "PartnerMapping") //用此方法需要在实体类定义映射
                 .setParameter("name", name)
                 .setMaxResults(5)
                 .getResultList();
-        list.forEach(partner -> {
-            logger.info(JSON.toJsonString(partner));
-        });
+       return list;
     }
 
+    public int MAX_CACHE_COUNT=2;
 }
 

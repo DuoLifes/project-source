@@ -6,7 +6,12 @@ import com.cn.connext.project.framework.annotation.WebAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /**
  * 媒体信息 - WebAPI访问接口
@@ -31,6 +36,13 @@ public class MediaAPI {
     @GetMapping("/list")
     public List<Media> findList() {
         return mediaService.findList();
+    }
+
+    @PostMapping("/http")
+    public void findHttpServletRequest( @RequestBody HttpServletRequest request, Media media) {
+        logger.info("request=="+request);
+        logger.info("media=="+media);
+        logger.info("param=="+request.getRequestURI()+"=="+request.getQueryString()+"=="+request.getRemoteAddr()+"=="+request.getRemoteHost()+"=="+request.getHeader("Authorization"));
     }
 }
 

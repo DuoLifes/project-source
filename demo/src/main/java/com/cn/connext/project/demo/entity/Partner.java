@@ -4,22 +4,22 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@SqlResultSetMapping(
-        name = "PartnerMapping",
-        entities = @EntityResult(
-                entityClass = Partner.class,
-                fields = {
-                        @FieldResult(name = "id", column = "id"),
-                        @FieldResult(name = "mediaId", column = "mediaId"),
-                        @FieldResult(name = "name", column = "name"),
-                        @FieldResult(name = "code", column = "code"),
-                        @FieldResult(name = "token", column = "token"),
-                        @FieldResult(name = "remark", column = "remark"),
-                        @FieldResult(name = "invalid", column = "invalid"),
-                        @FieldResult(name = "updateTime", column = "updateTime"),
-                        @FieldResult(name = "createIndex", column = "createIndex")
-                })
-)
+//@SqlResultSetMapping(
+//        name = "PartnerMapping",
+//        entities = @EntityResult(
+//                entityClass = Partner.class,
+//                fields = {
+//                        @FieldResult(name = "id", column = "id"),
+//                        @FieldResult(name = "mediaId", column = "mediaId"),
+//                        @FieldResult(name = "name", column = "name"),
+//                        @FieldResult(name = "code", column = "code"),
+//                        @FieldResult(name = "token", column = "token"),
+//                        @FieldResult(name = "remark", column = "remark"),
+//                        @FieldResult(name = "invalid", column = "invalid"),
+//                        @FieldResult(name = "updateTime", column = "updateTime"),
+//                        @FieldResult(name = "createIndex", column = "createIndex")
+//                })
+//)
 
 /*存储过程定义*/
 @NamedStoredProcedureQueries({
@@ -35,7 +35,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "partner")
-public class Partner {
+public  class Partner {
     /**
      * 唯一标识
      */
