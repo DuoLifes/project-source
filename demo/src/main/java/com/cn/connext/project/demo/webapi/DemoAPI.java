@@ -54,8 +54,11 @@ public class DemoAPI {
     public void test03(){
         Media media=new Media();
         InputParam inputParam=new InputParam();
+        /*泛型传参两种方式*/
+        /*1.把泛型定义为一个字段或属性来传递*/
 //        inputParam.t=media;
 //        inputParam.initOperation();
+        /*2.定义方法，把实体当参数传给泛型*/
         inputParam.initOperation(media);
     }
 

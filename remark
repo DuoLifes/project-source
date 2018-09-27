@@ -69,7 +69,7 @@ demo:
     1.简单的学习测试服务。
     2.@Configuration数据库配置。
     3.Spring JPA的EntityManage接口的使用。
-    4.泛型强转。
+    4.泛型传参和强转。
     5.java反射机制
     待研究，泛型内方法的调用，传参问题；EntityManage深入研究
 
