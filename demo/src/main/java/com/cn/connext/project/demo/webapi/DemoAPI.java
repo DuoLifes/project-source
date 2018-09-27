@@ -2,6 +2,8 @@ package com.cn.connext.project.demo.webapi;
 
 import com.cn.connext.project.demo.domain.InputParam;
 import com.cn.connext.project.demo.entity.Media;
+import com.cn.connext.project.demo.entity.Partner;
+import com.cn.connext.project.framework.JSON;
 import com.cn.connext.project.framework.Validator;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.slf4j.Logger;
@@ -11,10 +13,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * 案例测试接口 - WebAPI访问接口
@@ -62,16 +65,6 @@ public class DemoAPI {
         inputParam.initOperation(media);
     }
 
-    /*EntityManager接口的增删改查方法测试*/
-    @PersistenceContext(unitName = "mysqlEntityManagerFactory")
-    private EntityManager entityManager;
-    @GetMapping("/04")
-    @Transactional("mysqlTransactionManager")
-    public void test3(){
-        Media media=new Media();
-        entityManager.merge(media);
-        entityManager.flush();
-    }
     /*
     persist() :添加实体Bean
     flush() ：将实体的改变立刻刷新到数据库中
@@ -84,9 +77,60 @@ public class DemoAPI {
     clear() 分离所有当前正在被管理的实体
 */
 
+    /*EntityManager接口的增删改查方法测试*/
+    //两种注入方式其一:
+    @PersistenceContext(unitName = "mysqlEntityManagerFactory")
+    private EntityManager entityManager;
+    @GetMapping("/04")
+    @Transactional("mysqlTransactionManager")
+    public void test04(){
+        Media media=new Media();
+        entityManager.merge(media);
+        entityManager.flush();
+    }
+
+
+    //两种注入方式其二:
     @Autowired
     @Qualifier("mysqlEntityManagerFactory")
     private EntityManager em;
+    @GetMapping("/05")
+    public void test05(){
+        Media media=new Media();
+        em.merge(media);
+        em.flush();
+    }
+
+
+    /*存储过程的实现*/
+    @Autowired
+    @Qualifier("mysqlEntityManagerFactory")
+    private EntityManager em1;
+    @GetMapping("/06")
+    public void test06(){
+        StoredProcedureQuery storedProcedureQuery = em1.createNamedStoredProcedureQuery("getPartnerList");
+        storedProcedureQuery.execute();
+        List<Partner> list=storedProcedureQuery.getResultList();
+        list.forEach(partner -> {
+            logger.info(JSON.toJsonString(partner));
+        });
+    }
+
+    /*EntityManager接口自定义构建查询语句*/
+    @Autowired
+    @Qualifier("mysqlEntityManagerFactory")
+    private EntityManager em2;
+    @GetMapping("/07")
+    public void test07(){
+        String name="易车网";
+        List<Partner> list = em2.createNativeQuery("select * from partner where name like :name", "PartnerMapping")
+                .setParameter("name", name)
+                .setMaxResults(5)
+                .getResultList();
+        list.forEach(partner -> {
+            logger.info(JSON.toJsonString(partner));
+        });
+    }
 
 }
 

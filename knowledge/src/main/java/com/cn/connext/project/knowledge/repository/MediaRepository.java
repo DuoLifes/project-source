@@ -1,6 +1,6 @@
 package com.cn.connext.project.knowledge.repository;
 
-import com.cn.connext.project.framework.repository.ConnextRepository;
+import com.cn.connext.project.knowledge.dto.MediaDTO;
 import com.cn.connext.project.knowledge.entity.Media;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -24,5 +24,9 @@ public interface MediaRepository extends JpaRepository<Media, String>, JpaSpecif
     //自定义SQL
     @Query(value = "select * from media m where m.code like concat(:code,'%') and m.code!=:code", nativeQuery = true)
     List<Media> findAllByCode(@Param("code") String code);
+
+    /*通过构造器转换DTO*/
+    @Query("select new com.cn.connext.project.knowledge.dto.MediaDTO(m.id,m.name,m.code) from  Media m")
+    List<MediaDTO> findAllToDTO();
 }
 

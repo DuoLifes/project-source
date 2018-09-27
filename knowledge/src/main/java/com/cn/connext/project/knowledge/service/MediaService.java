@@ -1,5 +1,6 @@
 package com.cn.connext.project.knowledge.service;
 
+import com.cn.connext.project.knowledge.dto.MediaDTO;
 import com.cn.connext.project.knowledge.entity.Media;
 import com.cn.connext.project.knowledge.repository.MediaRepository;
 import org.slf4j.Logger;
@@ -35,5 +36,9 @@ public class MediaService {
      */
     public List<Media> findList() {
         return mediaRepository.findAll();
+    }
+
+    public List<MediaDTO> findAllToDTO(){
+        return mediaRepository.findAllToDTO();
     }
 }
