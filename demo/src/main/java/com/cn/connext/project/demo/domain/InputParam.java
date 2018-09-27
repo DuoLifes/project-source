@@ -12,13 +12,20 @@ import org.slf4j.LoggerFactory;
 public class InputParam<T> {
 
     private static final Logger logger = LoggerFactory.getLogger(InputParam.class);
-    public T t;
+//    public T t;
+//
+//    public void initOperation(){
+//        if(this.t.getClass()== Media.class){
+//            /*泛型转化为实体*/
+//            Media param = (Media) t;
+//            logger.info("param=="+ JSON.toJsonString(param));
+//        }
+//    }
 
-    public void initOperation(){
-        if(this.t.getClass()== Media.class){
-            /*泛型转化为实体*/
+    public void initOperation(T t){
+        if(t.getClass()==Media.class){
             Media param = (Media) t;
-            logger.info("param=="+ JSON.toJsonString(param));
+           logger.info("param=="+ JSON.toJsonString(param));
         }
     }
 }

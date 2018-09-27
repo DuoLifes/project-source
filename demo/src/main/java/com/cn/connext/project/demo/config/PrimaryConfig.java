@@ -26,7 +26,7 @@ import java.util.Map;
         entityManagerFactoryRef = "mysqlEntityManagerFactory",
         transactionManagerRef = "mysqlTransactionManager",
         basePackages = {"com.cn.connext.project.demo.repository"}) //设置Repository所在位置
-public class EntityManageConfig  {
+public class PrimaryConfig {
 
     @Autowired
     private JpaProperties jpaProperties;

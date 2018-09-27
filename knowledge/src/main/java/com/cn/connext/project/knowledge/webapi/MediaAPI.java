@@ -2,12 +2,16 @@ package com.cn.connext.project.knowledge.webapi;
 
 import com.cn.connext.project.framework.annotation.WebAPI;
 import com.cn.connext.project.knowledge.domain.Genericity;
+import com.cn.connext.project.knowledge.dto.MediaDTO;
 import com.cn.connext.project.knowledge.entity.Media;
 import com.cn.connext.project.knowledge.service.MediaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +75,26 @@ public class MediaAPI {
                 .filter(media -> "SA".equals(media.getCode()))
                 .filter(media -> media.getCode().toString().length()>2).count();
         return count;
+    }
+
+    /*JPA查询转换DTO*/
+    @GetMapping("/findAllToDTO")
+    public List<MediaDTO> findAllToDTO(){
+       return mediaService.findAllToDTO();
+    }
+
+    /*JPA使用EntityManager接口实现增删改查*/
+    /*两种注入EntityManager的方式*/
+    //@Resource  // 1.
+    @PersistenceContext // 2.
+    private EntityManager entityManager;
+    @GetMapping("/test")
+    /*事务管理：必须添加此注解*/
+    @Transactional
+    public void test04(){
+        Media media=new Media();
+        entityManager.merge(media);
+        entityManager.flush();
     }
 }
 
