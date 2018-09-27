@@ -54,10 +54,12 @@ public class DemoAPI {
     public void test03(){
         Media media=new Media();
         InputParam inputParam=new InputParam();
-        inputParam.t=media;
-        inputParam.initOperation();
+//        inputParam.t=media;
+//        inputParam.initOperation();
+        inputParam.initOperation(media);
     }
 
+    /*EntityManager接口的增删改查方法测试*/
     @PersistenceContext(unitName = "mysqlEntityManagerFactory")
     private EntityManager entityManager;
     @GetMapping("/04")
