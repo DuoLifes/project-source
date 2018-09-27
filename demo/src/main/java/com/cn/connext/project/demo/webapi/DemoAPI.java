@@ -131,7 +131,5 @@ public class DemoAPI {
                 .getResultList();
        return list;
     }
-
-    public int MAX_CACHE_COUNT=2;
 }
 
