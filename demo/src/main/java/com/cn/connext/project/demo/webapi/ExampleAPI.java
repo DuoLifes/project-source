@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -127,23 +128,24 @@ public class ExampleAPI {
 //    }
 
 
-    public static void main(String[] args) {
-        HttpGet get = new HttpGet("http://10.129.104.167:8510/api/demo/media/list");
-        HttpClient client = HttpClients.createDefault();
-        HttpResponse response = null;
-        try {
-            response = client.execute(get);
-            HttpEntity entity = response.getEntity();
-            String result = null;
-            if (entity != null) {
-                result = EntityUtils.toString(entity, "utf-8");
-                EntityUtils.consume(entity);
-                System.out.println(result);
-            }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
+    /*HttpGet访问本地服务*/
+//    public static void main(String[] args) {
+//        HttpGet get = new HttpGet("http://10.129.104.167:8510/api/demo/media/list");
+//        HttpClient client = HttpClients.createDefault();
+//        HttpResponse response = null;
+//        try {
+//            response = client.execute(get);
+//            HttpEntity entity = response.getEntity();
+//            String result = null;
+//            if (entity != null) {
+//                result = EntityUtils.toString(entity, "utf-8");
+//                EntityUtils.consume(entity);
+//                System.out.println(result);
+//            }
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
+//    }
 
 
 
@@ -152,4 +154,17 @@ public class ExampleAPI {
 
     /*public void httpGet() { CloseableHttpClient httpclient = HttpClients.createDefault(); try { // 创建httpget. HttpGet httpget = new HttpGet("http://www.baidu.com/"); System.out.println("executing request " + httpget.getURI()); // 执行get请求. CloseableHttpResponse response = httpclient.execute(httpget); try { // 获取响应实体 HttpEntity entity = response.getEntity(); // 打印响应状态 System.out.println(response.getStatusLine()); if (entity != null) { // 打印响应内容长度 System.out.println("Response content length: " + entity.getContentLength()); // 打印响应内容 System.out.println("Response content: " + EntityUtils.toString(entity)); } } finally { response.close(); } } catch (ClientProtocolException e) { e.printStackTrace(); } catch (ParseException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); } finally { // 关闭连接,释放资源 try { httpclient.close(); } catch (IOException e) { e.printStackTrace(); } } }
     */
+
+
+    /*格式化字符串的作用*/
+    public static void main(String[] args) {
+//       String a= MessageFormat.format("{0}''s Grade is A.", "abcdef");
+//        System.out.println(a);
+            String a= "aaa";
+            String b= "bb";
+            String c= "c";
+            StringBuilder sb = new StringBuilder();	sb.append(a).append(b).append(c);
+            System.out.println(MessageFormat.format(" {0} {1} {2} {3}", a, b,"",sb));
+            System.out.println(MessageFormat.format(" ''{0}'' '{1}' {2} {3}", a, b,"",sb.toString()));
+           }
 }

@@ -77,6 +77,7 @@ demo:
     7.存储过程的实现
     待研究：HTTP请求：HttpServletRequest   personasInfo服务里请求认证的问题;MD5加密解密
     HttpClient;im服务->util下面两个类研究
+    gateway服务权限过滤器
 
 
 
