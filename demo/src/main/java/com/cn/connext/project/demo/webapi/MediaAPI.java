@@ -5,9 +5,8 @@ import com.cn.connext.project.demo.service.MediaService;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -34,6 +33,11 @@ public class MediaAPI {
     @GetMapping("/list")
     public List<Media> findList() {
         return mediaService.findList();
+    }
+
+    @PostMapping("/findOne")
+    public Media findOne(@RequestParam String id){
+        return mediaService.findOne(id);
     }
 
     @PostMapping("/http")

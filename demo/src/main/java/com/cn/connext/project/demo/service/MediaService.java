@@ -36,4 +36,8 @@ public class MediaService {
     public List<Media> findList() {
         return mediaRepository.findAll();
     }
+
+    public Media findOne(String id){
+        return mediaRepository.findOne(id);
+    }
 }
