@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
+
 /**
  * 媒体信息 - WebAPI访问接口
  * 开发人员: 张帅
@@ -40,11 +43,23 @@ public class MediaAPI {
         return mediaService.findOne(id);
     }
 
-    @PostMapping("/http")
-    public void findHttpServletRequest( @RequestBody HttpServletRequest request, Media media) {
-        logger.info("request=="+request);
-        logger.info("media=="+media);
-        logger.info("param=="+request.getRequestURI()+"=="+request.getQueryString()+"=="+request.getRemoteAddr()+"=="+request.getRemoteHost()+"=="+request.getHeader("Authorization"));
+    /*遍历Map*/
+    @GetMapping("/map")
+    public void map(){
+        Map<String, Media> map = new Hashtable<>();
+        mediaService.findList().stream()
+                .forEach(media ->map.put(media.getId(),media));
+
+        /*遍历value*/
+        for (Map.Entry<String, Media> maps : map.entrySet()) {
+            System.out.println(maps.getValue().getName());
+        }
+        /*遍历key*/
+        for (String key : map.keySet()) {
+            System.out.println(key);
+        }
+        /*根据key清除map的value*/
+        map.remove("");
     }
 }
 

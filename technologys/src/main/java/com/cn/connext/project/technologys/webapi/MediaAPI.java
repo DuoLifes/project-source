@@ -38,7 +38,7 @@ public class MediaAPI {
         return mediaRepository.findAll();
     }
 
-    /*排序&分页*/
+    /*排序&&分页*/
     @GetMapping("/sort")
     public Page<Media> sortList() {
         List<Sort.Order> orders = new ArrayList<Sort.Order>();
@@ -75,6 +75,14 @@ public class MediaAPI {
                 }
             });
         }
+        return list;
+    }
+
+    /*排序:默认正序*/
+    @GetMapping("/sort4")
+    public List<Media> sortList4() {
+        List<Media> list = mediaRepository.findAll();
+        list.sort(Comparator.comparing(sortItem -> sortItem.getCreateIndex()));
         return list;
     }
 }
