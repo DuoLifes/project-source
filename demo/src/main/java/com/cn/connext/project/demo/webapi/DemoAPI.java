@@ -44,17 +44,11 @@ public class DemoAPI {
             logger.info("e:"+e);
         }
     }
-    /*验证字段是否为空*/
-    @GetMapping("/02")
-    public void test02(){
-        String value="abcdefg";
-        boolean flag=Validator.isEmpty(value);
-        logger.info("flag=="+flag);
-    }
+
 
     /*泛型对实体的转化*/
-    @GetMapping("/03")
-    public void test03(){
+    @GetMapping("/02")
+    public void test02(){
         Media media=new Media();
         InputParam inputParam=new InputParam();
         /*泛型传参两种方式*/

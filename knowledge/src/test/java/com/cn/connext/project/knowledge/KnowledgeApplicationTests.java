@@ -20,67 +20,8 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class KnowledgeApplicationTests {
-
-	private static final Logger logger = LoggerFactory.getLogger(KnowledgeApplicationTests.class);
-
 	@Test
 	public void contextLoads() {
 		System.out.println("枚举值:"+ Sex.man.getValue());
-	}
-
-	/*截取字符串*/
-	@Test
-	public void test01() {
-		String str="This,Server,Is,Knowledge!";
-		String[] test = str.split(",");
-		for (int i=0;i<test.length;i++) {
-			System.out.println("第"+(i+1)+"个元素是:"+test[i]);
-		}
-	}
-	/*打印map*/
-	@Test
-	public void test02() {
-		Map<String,Object> map=new HashMap<>();
-		map.put("name","张三");
-		map.put("time",new Date());
-		map.put("age",25);
-		logger.info("map:"+map.toString());
-		//System.exit(0);
-	}
-	/*重写toString方法打印实体*/
-	/*toJsonString方法打印实体*/
-	@Test
-	public void test03() {
-		Media media=new Media();
-		logger.info("media:"+ JSON.toJsonString(media));
-		logger.info("media:"+ media.toString());
-	}
-
-	/*自定义注解验证*/
-	@Test
-	public void test04(){
-		//获取类
-		Class clazz= ForumService.class;
-		//获取类中的方法
-		Method[] methods=clazz.getDeclaredMethods();
-		for(Method method:methods){
-			//获取方法上的注解
-			NeedTest nt=method.getAnnotation(NeedTest.class);
-			if(nt!=null){
-				if(nt.value()){
-					System.out.println("需要测试");
-				}
-				else {
-					System.out.println("不需要测试");
-				}
-			}
-		}
-	}
-
-	/*跟进下标取字符串值*/
-	@Test
-	public void test05(){
-		String str="abcdefg";
-		logger.info("str=="+str.charAt(2));
 	}
 }

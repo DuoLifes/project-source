@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @WebAPI("/api/technology/media")
@@ -22,8 +24,8 @@ public class MediaAPI {
     private MediaRepository mediaRepository;
 
     @GetMapping("/create")
-    public Media create(){
-        Media media=new Media();
+    public Media create() {
+        Media media = new Media();
         media.setMediaTypeId("433E44B0-C6B3-4E15-8F1E-C626BA248A8C");
         media.setCode("SA09776");
         media.setName("测试媒体");
@@ -38,39 +40,41 @@ public class MediaAPI {
 
     /*排序&分页*/
     @GetMapping("/sort")
-    public Page<Media> sortList(){
-        List<Sort.Order> orders=new ArrayList<Sort.Order>();
+    public Page<Media> sortList() {
+        List<Sort.Order> orders = new ArrayList<Sort.Order>();
         orders.add(new Sort.Order(Sort.Direction.ASC, "createIndex"));
         Pageable pageable = new PageRequest(0, 20, new Sort(orders));
         return mediaRepository.findAll(pageable);
     }
+
     /*添加多个字段排序*/
     @GetMapping("/sort1")
-    public List<Media> sortList1(){
-        List<Sort.Order> orders=new ArrayList<Sort.Order>();
+    public List<Media> sortList1() {
+        List<Sort.Order> orders = new ArrayList<Sort.Order>();
         orders.add(new Sort.Order(Sort.Direction.DESC, "createIndex"));
         orders.add(new Sort.Order(Sort.Direction.DESC, "updateTime"));
         return mediaRepository.findAll(new Sort(orders));
     }
+
     /*排序*/
     @GetMapping("/sort2")
-    public List<Media> sortList2(){
-        Sort sort = new Sort(Sort.Direction.DESC,"createIndex");
+    public List<Media> sortList2() {
+        Sort sort = new Sort(Sort.Direction.DESC, "createIndex");
         return mediaRepository.findAll(sort);
     }
 
-    @Resource
-    private OrderRepository orderRepository;
-    @GetMapping("/order")
-    public List<Orders> find(){
-        return orderRepository.findAll();
-    }
-
-    @GetMapping("/createOrder")
-    public Orders aa(){
-        Orders orders=new Orders();
-        orders.setId("003");
-        orders.setName("网络单");
-        return orderRepository.save(orders);
+    /*重写排序:备注: > 是从小到大正序  < 是从大到小倒序*/
+    @GetMapping("/sort3")
+    public List<Media> sortList3() {
+        List<Media> list = mediaRepository.findAll();
+        if (list != null && list.size() > 0) {
+            Collections.sort(list, new Comparator<Media>() {
+                @Override
+                public int compare(Media o1, Media o2) {
+                    return (o1.getCreateIndex() < o2.getCreateIndex()) ? 1 : -1;
+                }
+            });
+        }
+        return list;
     }
 }

@@ -18,7 +18,7 @@ public class OrdersAPI {
         return orderRepository.findAll();
     }
 
-    //创建实体auto添加创建人;创建时间
+    //创建实体：自动添加创建人；创建时间
     @GetMapping("/create")
     public Orders aa(){
         Orders orders=new Orders();
