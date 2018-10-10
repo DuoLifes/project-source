@@ -1,0 +1,18 @@
+server:
+  port: 8511
+
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  http:
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 100MB
+
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
