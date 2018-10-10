@@ -4,7 +4,6 @@ import com.cn.connext.project.demo.domain.InputParam;
 import com.cn.connext.project.demo.entity.Media;
 import com.cn.connext.project.demo.entity.Partner;
 import com.cn.connext.project.framework.JSON;
-import com.cn.connext.project.framework.Validator;
 import com.cn.connext.project.framework.annotation.WebAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,10 +24,10 @@ import java.util.List;
  * 开发人员: 张帅
  * 修订日期: 2018-01-25 15:18:53
  */
-@WebAPI("/api/demo/test")
-public class DemoAPI {
+@WebAPI("/api/demo/example01")
+public class Example01API {
 
-    private static final Logger logger = LoggerFactory.getLogger(DemoAPI.class);
+    private static final Logger logger = LoggerFactory.getLogger(Example01API.class);
 
     /*验证java反射机制*/
     @GetMapping("/01")
@@ -124,6 +124,37 @@ public class DemoAPI {
                 .setMaxResults(5)
                 .getResultList();
        return list;
+    }
+
+    /*SpringMVC异步实现*/
+    @GetMapping("/08")
+    public DeferredResult<String> deferredResult(){
+        DeferredResult<String> deferredResult = new DeferredResult<String>(10000L);
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    String result="测试";
+                    deferredResult.setResult(result);
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    deferredResult.setErrorResult(e);
+                }
+            }
+        }.start();
+        return deferredResult;
+    }
+
+    /*SpringMVC同步请求*/
+    @GetMapping("/09")
+    public String synchronization(){
+        try {
+            Thread.sleep(5000);
+            return "结束";
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "完结";
     }
 }
 

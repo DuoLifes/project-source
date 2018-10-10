@@ -1,65 +1,116 @@
 package com.cn.connext.project.demo.webapi;
 
-import com.cn.connext.project.framework.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.text.MessageFormat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+/*
+*  main方法单元测试小知识点
+*/
 
 public class Test01API {
 
-    /*字符串首字母转小写*/
-    /*public static void main(String[] args) {
-        String s="Abcde";
-        if(Character.isLowerCase(s.charAt(0))) {
-            System.out.println(s);
-        } else {
-            System.out.println((new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString());
-        }
-    }*/
+    private static final Logger logger = LoggerFactory.getLogger(Test01API.class);
 
-    /*验证字段是否为空*/
+    /*多态实现*/
     /*public static void main(String[] args) {
-        String value="abcdefg";
-        boolean flag= Validator.isEmpty(value);
-        System.out.println("flag=="+flag);
+        Tea tea=new Tea();
+        tea.drinkTea();
+        tea.drink();
+        tea.drink(1);
+        Drink drink=new Tea();
+        drink.drink();
+        Drink drink1=new Coffee();
+        drink1.drink();
     }*/
 
 
-    /*Double类型保留有效数字*/
+    /*知识点验证*/
     /*public static void main(String[] args) {
-        double a=2.445555;
-        double b=5.897788;
-        double c=a+b;
-        *//*保留有效数字计算*//*
-        double result=Math.round(c*100)/100d;
-        System.out.println(c);
-        System.out.println(result);
-        *//*添加百分号*//*
-        System.out.println(String.format("%.2f",result)+"%");
+        String a="zbcdefg";
+        System.out.println(a.length());
+
+        String [] test={"abc","efg","hij"};
+        System.out.println(test.length);
+
+        String demo="test1";
+        demo="test2";
+        StringBuffer demo2=new StringBuffer("abcdefg");
+        demo2.indexOf("cd");
+        System.out.println(demo2.indexOf("cd"));
+        List<Tea> list=new ArrayList<>();
+        Map<String,Object> map=new HashMap<>();
+        Hashtable<String,Tea> hashtable=new Hashtable<>();
+        Integer cc=2;
+        int b=4;
+        Object object1=b;
+        Object object=a;
+        byte aa=11;
+        System.out.println("aa=="+aa);
     }*/
 
-    /*时间格式化:Date转String*/
+    /*java判断方式*/
     /*public static void main(String[] args) {
-        Date time = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
-        String date = format.format(time);
-        System.out.println(date);
+        String a = "b";
+        String test = "a".equals(a) ? test = "yes" : "no";
+        System.out.println(test);
     }*/
 
-    /*时间格式化:String转Date&&DateTime*/
+
+    /*正则表达式验证字符串*/
     /*public static void main(String[] args) {
+        Pattern pattern = Pattern.compile("^[a-zA-Z]\\w{5,17}$");
+        String test = "abcdef";
+        Matcher matcher = pattern.matcher(test);
+        System.out.println(matcher.find());
         try {
-            String time="2018-10-20";
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = format.parse(time);
-            System.out.println(date);
-        } catch (ParseException e) {
+            String aa = matcher.group();
+            System.out.println("aa==" + aa);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }*/
 
 
+    /*Math的方法&&对时间的处理方式*/
+    /*public static void main(String[] args) {
+        *//*圆周率*//*
+        System.out.println(Math.PI);
+        *//*计算当前时间的半小时前*//*
+        SimpleDateFormat sfm1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, -30);
+        String date = sfm1.format(calendar.getTime());
+        *//*取当前时间一个小时前*//*
+        Calendar ca = Calendar.getInstance();
+        ca.set(Calendar.HOUR_OF_DAY, ca.get(Calendar.HOUR_OF_DAY) - 1);
+        String time = sfm1.format(ca.getTime());
+        *//*打印时间*//*
+        System.out.println(time);
+        System.out.println(date);
+    }*/
 
 
+
+    /*格式化字符串的作用01*/
+    /*public static void main(String[] args) {
+        String result = MessageFormat.format("{0}''s Grade is A.", "abcdef");
+        System.out.println(result);
+
+        String a = "aaa";
+        String b = "bb";
+        String c = "c";
+        StringBuilder sb = new StringBuilder();
+        sb.append(a).append(b).append(c);
+        System.out.println(MessageFormat.format(" {0} {1} {2} {3}", a, b, "", sb));
+        System.out.println(MessageFormat.format(" ''{0}'' '{1}' {2} {3}", a, b, "", sb.toString()));
+    }*/
+
+    /*格式化字符串的作用02*/
+    /*public static void main(String[] args) {
+        Logger logger = LoggerFactory.getLogger("客服消息");
+        *//*pattern{} 里是参数index*//*
+        String logInfo = MessageFormat.format("经销商编号:{0}, 顾问编号:{1}, 客户编号:{2}, 消息内容:{3}", 111, 222, 333, "经销商详情");
+        logger.info(logInfo);
+    }*/
 }

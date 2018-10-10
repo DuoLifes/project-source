@@ -6,12 +6,8 @@ import com.cn.connext.project.framework.annotation.WebAPI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 媒体信息 - WebAPI访问接口
@@ -61,5 +57,26 @@ public class MediaAPI {
         /*根据key清除map的value*/
         map.remove("");
     }
+
+    /*删除集合的三种方式：1.iterator迭代器的使用*/
+    @GetMapping("/iterator")
+    public List<Media> iterator(){
+        List<Media> list=mediaService.findList();
+        List<Media> mediaList=new ArrayList<>();
+        Media media=mediaService.findOne("999BF3CC-D5E5-4AFF-9D64-785366B36A0F");
+        Iterator<Media> iter = list.iterator();
+        while (iter.hasNext()) {
+            Media m = iter.next();
+            if ("107AEEC9-B5AA-4740-A88F-66457E593BD1".equals(m.getId())) {
+                iter.remove();
+            }else {
+                mediaList.add(m);
+            }
+        }
+        mediaList.remove(media);
+        mediaList.remove(1);
+        return mediaList;
+    }
+
 }
 
