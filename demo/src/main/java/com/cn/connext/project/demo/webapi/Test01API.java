@@ -3,6 +3,13 @@ package com.cn.connext.project.demo.webapi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.text.MessageFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
 *  main方法单元测试小知识点
@@ -71,8 +78,20 @@ public class Test01API {
         }
     }*/
 
+    /*正则表达式验证时间格式**时间格式验证只支持"yyyy-MM-dd HH:mm:ss"与"yyyy-MM-dd HH:mm:ss.SSS*/
+    /*public static void main(String[] args) {
+        String regex = "^(\\d{4}\\-\\d{2}-\\d{2}\\s{1}\\d{2}:\\d{2}:\\d{2})(|\\.\\d{3})$";
+        Pattern pattern = Pattern.compile(regex);
+        String time="2018-10-10 12:00:00";
+        Matcher matcher = pattern.matcher(time);
+        boolean flag=matcher.find();
+        String resout=matcher.group(1);
+        System.out.println(flag);
+        System.out.println(resout);
+    }*/
 
-    /*Math的方法&&对时间的处理方式*/
+
+    /*对时间的处理方式1*/
     /*public static void main(String[] args) {
         *//*圆周率*//*
         System.out.println(Math.PI);
@@ -90,6 +109,65 @@ public class Test01API {
         System.out.println(date);
     }*/
 
+    /*对时间的处理方式2*/
+    /*public static void main(String[] args) {
+        Test01API test01API=new Test01API();
+        String[] last12Months=test01API.getLast12Months();
+            System.out.println(Arrays.toString(last12Months));
+    }*/
+    /*根据当前年月计算前11个月*/
+    /*public  String[] getLast12Months() {
+        String time = "2018-10-10 12:00:00";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        try{
+            date= sdf.parse(time);
+        }catch (ParseException e){
+            System.out.println(e);
+        }
+        String[] last12Months = new String[12];
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)+1);
+        for(int i=0; i<12; i++){
+            cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)-1); //逐次往前推1个月
+            last12Months[11-i] = cal.get(Calendar.YEAR)+ "-" + addZeroForNum(String.valueOf(cal.get(Calendar.MONTH)+1), 2);
+        }
+        return last12Months;
+    }*/
+    /*内部调用*/
+   /* public  String addZeroForNum(String str, int strLength) {
+        int strLen = str.length();
+        if (strLen < strLength) {
+            while (strLen < strLength) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);// 左补0
+                // sb.append(str).append("0");//右补0
+                str = sb.toString();
+                strLen = str.length();
+            }
+        }
+        return str;
+    }*/
+
+    /*对时间的处理方式3：取上个月的最后一天*/
+    /*public static void main(String[] args) {
+        int year=2018;
+        int month=10;
+        Calendar cal = Calendar.getInstance();
+        //设置年份
+        cal.set(Calendar.YEAR,year);
+        //设置月份
+        cal.set(Calendar.MONTH, month-2);
+        //获取某月最大天数
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        //设置日历中月份的最大天数
+        cal.set(Calendar.DAY_OF_MONTH, lastDay);
+        //格式化日期
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String lastDayOfMonth = sdf.format(cal.getTime());
+        System.out.println(lastDayOfMonth);
+    }*/
 
 
     /*格式化字符串的作用01*/

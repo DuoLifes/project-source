@@ -76,6 +76,7 @@ demo:
     6.EntityManager接口自定义构建查询语句
     7.存储过程的实现
     8.SpringMVC异步实现:DeferredResult(MediaAPI) 学习参考:im服务ChatAPI
+    9.StartTimer定时任务的实现。
 
     待研究：
     一.
@@ -83,11 +84,11 @@ demo:
     2.demo服务下SpringMVC异步实现:DeferredResult(MediaAPI)
 
     二.
-    1.personasInfo服务里请求认证的问题;MD5加密解密
+    1.personasInfo服务里请求认证的问题;MD5加密解密（feedback服务AutoHomeFeedbackService文件：设置请求头；RestTemplateConfig配置文件）。
     2.HttpClient;im服务->util下面两个类研究
     3.gateway:服务权限过滤器
-    4.push-crm&&portal:webservice接口研究
-    5.follow服务
+    4.push-crm&&portal&&crm-server:webservice接口研究
+    5.follow;dms;data-tools;devops服务
 
     三.
-    AOP；webservice;日志；echars;jar包作用,全局自定义异常
+    AOP；webservice;日志；echars;jar包作用

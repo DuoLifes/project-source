@@ -1,13 +1,16 @@
 package com.cn.connext.project.demo.webapi;
 
 import com.cn.connext.project.framework.Validator;
+import com.cn.connext.project.framework.exception.ServiceException;
 import com.netflix.discovery.util.StringUtil;
 import org.springframework.util.StringUtils;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /*
 *  main方法单元测试小知识点
@@ -75,6 +78,68 @@ public class Test02API {
             flag=true;
         }
         System.out.println(flag);
+    }*/
+
+    /*对集合的处理stream().map()和stream().forEach()*/
+    /*public static void main(String[] args) {
+        List<Integer> num = Arrays.asList(1,2,3,4,5);
+        List<Integer> collect = num.stream().map(n -> n * 2).collect(Collectors.toList());
+        Hashtable<Integer, Integer> hashtable = new Hashtable<>();
+        num.stream().forEach(n ->hashtable.put(n,n));
+        System.out.println(collect); //[2, 4, 6, 8, 10]
+        System.out.println(hashtable.toString());
+    }*/
+
+    /*休眠:相当于Thread.sleep(3000);*/
+    /*public static void main(String[] args) {
+        for(int i=1;i<=10;i++){
+            try {
+                System.out.println("第:"+i+"次循环");
+                TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+
+    /*全局异常设置*/
+    /*public static void main(String[] args) {
+        String result=null;
+        if(StringUtils.isEmpty(result)){
+            throw new ServiceException("string_error_idEmpty");
+        }
+    }*/
+
+    /*list元素按大小排序：int型*/
+    /*public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(2);
+        list.add(8);
+        list.add(6);
+        list.add(4);
+        list.add(10);
+        *//*正序排序*//*
+        Collections.sort(list,(m1,m2)->m1.compareTo(m2));
+        System.out.println(list);
+    }*/
+
+    /*计算两个小数的商，结果取4位有效数字*/
+    /*public static void main(String[] args) {
+        BigDecimal temp1 = new BigDecimal(String.valueOf(12.24443));
+        BigDecimal temp2 = new BigDecimal(String.valueOf(16.23456));
+        System.out.println(String.valueOf(temp1.divide(temp2,4,BigDecimal.ROUND_HALF_UP).doubleValue()));
+    }*/
+
+    /*long转double*/
+    /*public static void main(String[] args) {
+        double a=Double.longBitsToDouble(12);
+        double b=Double.longBitsToDouble(23);
+        double x=12;
+        double y=23;
+        double c=a/b;
+        double z=x/y;
+        System.out.println(c);
+        System.out.println(z);
     }*/
 
 }

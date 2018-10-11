@@ -1,0 +1,37 @@
+
+1.page.hasContent():分页查询的结果使用这个方法判断返回数据是否为空。
+2.page.getContent();获取List集合。
+3.es构建查询容器：
+BoolQueryBuilder searchQuery = QueryBuilders.boolQuery();
+
+searchQuery.must(QueryBuilders.rangeQuery("feedBackFollowTime").lte(currentTime).timeZone("+08:00"))
+                    .must(QueryBuilders.termQuery("feedBackState", 1))
+                    .must(QueryBuilders.termQuery("partnerId", partnerId))
+                    .must(QueryBuilders.termsQuery("isTestDealerLeads", false));
+Page<LeadsSearchInfo> page = leadsSearchInfoRepository.findPage(searchQuery, pageable);
+
+public Page findPage(QueryBuilder queryBuilder, Pageable pageable) {
+        return findPage(ES_INDEX_READ_NAME,
+                ES_TYPE_NAME,
+                queryBuilder,
+                pageable,
+                LeadsSearchInfo.class);
+    }
+
+4.feedback服务配置文件：负载均衡器&&熔断机制设置
+basic:
+  ribbon:                                         # 负载均衡器设置
+    ConnectTimeout: 3000
+    ReadTimeout: 120000
+    OkToRetryOnAllOperations: true
+    MaxAutoRetries: 1
+    MaxAutoRetriesNextServer: 2
+    ServerListRefreshInterval: 2
+
+hystrix:                                       # 熔断器设置
+  command:
+    basic:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
