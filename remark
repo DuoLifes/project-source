@@ -88,7 +88,8 @@ demo:
     2.HttpClient;im服务->util下面两个类研究
     3.gateway:服务权限过滤器
     4.push-crm&&portal&&crm-server:webservice接口研究
-    5.follow;dms;data-tools;devops服务
+    5.devops:建权问题
+    5.follow;dms;data-tools
 
     三.
     AOP；webservice;日志；echars;jar包作用
