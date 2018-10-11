@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
 import java.util.List;
 
+/*通过配置文件配置属性值--测试*/
 @WebAPI("/api/demo/commonTest")
 public class CommonTest {
     @Resource
@@ -23,4 +24,5 @@ public class CommonTest {
         List<Channel> channelList=propertyConfig.getChannel();
         return channelList;
     }
+
 }
