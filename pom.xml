@@ -19,6 +19,7 @@
 		<module>knowledge</module>
 		<module>demo</module>
 		<module>file</module>
+		<module>view</module>
 	</modules>
 
 	<parent>

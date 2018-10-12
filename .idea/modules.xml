@@ -18,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/registry/registry.iml" filepath="$PROJECT_DIR$/registry/registry.iml" />
       <module fileurl="file://$PROJECT_DIR$/start-elasticsearch/start-elasticsearch.iml" filepath="$PROJECT_DIR$/start-elasticsearch/start-elasticsearch.iml" />
       <module fileurl="file://$PROJECT_DIR$/technologys/technologys.iml" filepath="$PROJECT_DIR$/technologys/technologys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view/view.iml" filepath="$PROJECT_DIR$/view/view.iml" />
     </modules>
   </component>
 </project>
