@@ -1,4 +1,4 @@
-package com.cn.connext.project.view.pojo;
+package com.cn.connext.project.view.entity;
 
 public class User {
     private String id;

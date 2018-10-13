@@ -12,11 +12,6 @@
 	<artifactId>view</artifactId>
 
 	<dependencies>
-		<!--framework-->
-		<dependency>
-			<groupId>com.cn.connext.project</groupId>
-			<artifactId>framework</artifactId>
-		</dependency>
 		<!--SpringCloud-->
 		<!--外部配置-->
 		<dependency>
@@ -40,11 +35,22 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--前端模板引擎-->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-		<!--</dependency>-->
+		<!--MYSQL-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!--JPA-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!--连接池-->
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+		<!--freemarker模板引擎-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
@@ -55,5 +61,10 @@
 			<artifactId>gson</artifactId>
 			<version>2.8.2</version>
 		</dependency>
+		<!--前端模板引擎-->
+		<!--<dependency>-->
+		<!--<groupId>org.springframework.boot</groupId>-->
+		<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+		<!--</dependency>-->
 	</dependencies>
 </project>

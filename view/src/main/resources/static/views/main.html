@@ -28,13 +28,19 @@
                         $.each(data,function(n,value){
                             tr +="<tr>";
                             tr += "<td>" + value.id + "</td>"
-                            tr += "<td>" + value.username + "</td>"
-                            tr += "<td>" + value.password + "</td>"
+                            tr += "<td>" + value.mediaId + "</td>"
+                            tr += "<td>" + value.name + "</td>"
+                            tr += "<td>" + value.code + "</td>"
+                            tr += "<td>" + value.token + "</td>"
+                            tr += "<td>" + value.remark + "</td>"
+                            tr += "<td>" + value.invalid + "</td>"
+                            tr += "<td>" + value.updateTime + "</td>"
+                            tr += "<td>" + value.createIndex + "</td>"
                             tr += "</tr>"
                         })
                         $("#personList").html(tr);
                     } else {
-                        alert("用户名或密码错误");
+                        alert("您没有权限查询数据");
                     }
                 },
                 error: function (data) {
@@ -47,7 +53,8 @@
 </head>
 <body>
 Welcome To Main Page
-查询用户：
+查询所有合伙人信息：
+身份验证：
 <input type="text" id="username" placeholder="请输入用户名">
 <input type="text" id="password" placeholder="请输入密码">
 <button id="btn" onclick="submit()">提交</button>

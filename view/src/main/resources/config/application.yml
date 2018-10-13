@@ -1,31 +1,39 @@
 server:
   port: 8511
-########################################################
 
-###THYMELEAF (ThymeleafAutoConfiguration)
+db:
+  host: localhost
+  port: 3306
+  username: root
+  password: 123456
 
-########################################################
-## 模板配置
-## 这个开发配置为false，避免改了模板还要重启服务器
-#spring.thymeleaf.cache=false
-## 这个是配置模板路径的，默认就是templates，可不用配置
-#spring.thymeleaf.prefix=classpath:/templates/
-## 这个可以不配置，检查模板位置
-#spring.thymeleaf.check-template-location=true
-## 下面3个不做解释了，可以不配置
-#spring.thymeleaf.suffix=.html
-#spring.thymeleaf.encoding=UTF-8
-#spring.thymeleaf.servlet.content-type=text/html
-## 模板的模式
-#spring.thymeleaf.mode=HTML5
-
-
-########################################################
-
-###FREEMARKER (FreeMarkerAutoConfiguration)
-
-########################################################
 spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${db.host}:${db.port}/ddmp_basic?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: ${db.username}
+    password: ${db.password}
+    hikari:
+      pool-name: project-technologys
+      cachePrepStmts: true
+      prepStmtCacheSize: 250
+      prepStmtCacheSqlLimit: 2048
+      useServerPrepStmts: true
+
+
+
   freemarker:
     allow-request-override: false
     cache: true
@@ -37,8 +45,18 @@ spring:
     expose-spring-macro-helpers: false
     suffix: .html
     template-loader-path: classpath:/static/views
-#spring.freemarker.prefix=
-#spring.freemarker.request-context-attribute=
-#spring.freemarker.settings.*=
-#spring.freemarker.template-loader-path=classpath:/templates/ #comma-separated list
-#spring.freemarker.view-names= # whitelist of view names that can be resolved
+#    prefix:
+#    request-context-attribute:
+#    settings: *=
+#    view-names: # whitelist of view names that can be resolved
+
+
+#spring:
+#  thymeleaf:                                 # thymeleaf：模板配置
+#    cache: false                             # 这个开发配置为false，避免改了模板还要重启服务器
+#    prefix: classpath:/templates/            # 这个是配置模板路径的，默认就是templates，可不用配置
+#    check-template-location: true          # 这个可以不配置，检查模板位置
+#    suffix: .html
+#    encoding: utf-8
+#    content-type: text/html
+#    mode: HTML5
