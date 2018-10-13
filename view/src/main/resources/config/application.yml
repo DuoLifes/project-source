@@ -36,6 +36,7 @@ spring:
     expose-session-attributes: false
     expose-spring-macro-helpers: false
     suffix: .html
+    template-loader-path: classpath:/static/views
 #spring.freemarker.prefix=
 #spring.freemarker.request-context-attribute=
 #spring.freemarker.settings.*=
