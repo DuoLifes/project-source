@@ -1,4 +1,5 @@
-server.port=8511
+server:
+  port: 8511
 ########################################################
 
 ###THYMELEAF (ThymeleafAutoConfiguration)
@@ -24,15 +25,17 @@ server.port=8511
 ###FREEMARKER (FreeMarkerAutoConfiguration)
 
 ########################################################
-spring.freemarker.allow-request-override=false
-spring.freemarker.cache=true
-spring.freemarker.check-template-location=true
-spring.freemarker.charset=UTF-8
-spring.freemarker.content-type=text/html
-spring.freemarker.expose-request-attributes=false
-spring.freemarker.expose-session-attributes=false
-spring.freemarker.expose-spring-macro-helpers=false
-spring.freemarker.suffix=.html
+spring:
+  freemarker:
+    allow-request-override: false
+    cache: true
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .html
 #spring.freemarker.prefix=
 #spring.freemarker.request-context-attribute=
 #spring.freemarker.settings.*=
