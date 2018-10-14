@@ -7,10 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/start")
 public class LoginAPI {
 
-    @RequestMapping("/login")
-    public String login(){
+    @RequestMapping("/aaa")
+    public String bbb(){
         return "login";
     }
 }
