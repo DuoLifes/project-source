@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/devops/devops.iml" filepath="$PROJECT_DIR$/devops/devops.iml" />
       <module fileurl="file://$PROJECT_DIR$/file/file.iml" filepath="$PROJECT_DIR$/file/file.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" filepath="$PROJECT_DIR$/ibatis-basic/ibatis-basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/knowledge/knowledge.iml" filepath="$PROJECT_DIR$/knowledge/knowledge.iml" />
       <module fileurl="file://$PROJECT_DIR$/multi-datasource/multi-datasource.iml" filepath="$PROJECT_DIR$/multi-datasource/multi-datasource.iml" />

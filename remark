@@ -97,3 +97,7 @@ demo:
 
 view:
     此服务用于前端学习研究：jquery;ajax;javaScript...
+    使用freemarker视图模板引擎
+
+geteway:
+    此服务用于研究安全验证框架Spring-Security

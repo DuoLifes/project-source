@@ -13,6 +13,7 @@
         <module name="devops" />
         <module name="file" />
         <module name="framework" />
+        <module name="gateway" />
         <module name="ibatis-basic" />
         <module name="knowledge" />
         <module name="multi-datasource" />
@@ -32,6 +33,7 @@
       <module name="devops" target="1.8" />
       <module name="file" target="1.8" />
       <module name="framework" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="ibatis-basic" target="1.8" />
       <module name="knowledge" target="1.8" />
       <module name="multi-datasource" target="1.8" />
