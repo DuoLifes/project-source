@@ -1,16 +1,10 @@
 package com.cn.connext.project.demo.webapi;
 
-import com.cn.connext.project.framework.Validator;
-import com.cn.connext.project.framework.exception.ServiceException;
-import com.netflix.discovery.util.StringUtil;
-import org.springframework.util.StringUtils;
+import com.cn.connext.project.demo.entity.Outer;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 *  main方法单元测试小知识点
@@ -141,5 +135,20 @@ public class Test02API {
         System.out.println(c);
         System.out.println(z);
     }*/
+
+    /*内部类调用测试*/
+    /*public static void main(String[] args) {
+        String str="测试字符串hash值";
+        System.out.println(str.hashCode());
+        Outer outer=new Outer();
+        Outer.Inside_One inside_one=outer.new Inside_One();
+        inside_one.test();
+        Outer.Inside_Two inside_two=new Outer.Inside_Two();
+        inside_two.test();
+    }*/
+
+    public static void main(String[] args) {
+
+    }
 
 }

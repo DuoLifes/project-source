@@ -12,7 +12,7 @@ public class Tea extends Drink {
         System.out.println("Tea重写Drink方法");
     }
     public void drink(Integer num){
-        System.out.println("重载Drink方法");
+        System.out.println("Tea重载Drink方法");
     }
 
     public String getName() {

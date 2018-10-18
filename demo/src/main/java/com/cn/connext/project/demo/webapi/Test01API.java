@@ -1,5 +1,6 @@
 package com.cn.connext.project.demo.webapi;
 
+import com.cn.connext.project.demo.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.text.MessageFormat;
@@ -21,14 +22,23 @@ public class Test01API {
 
     /*多态实现*/
     /*public static void main(String[] args) {
+        *//*子类调用自己重写重载和专有的方法不叫多态*//*
         Tea tea=new Tea();
         tea.drinkTea();
         tea.drink();
         tea.drink(1);
+        *//*只有父类引用变量实例化具体的子类并且调用了子类重写的方法才叫多态*//*
+        *//*这叫做基于继承实现多态*//*
         Drink drink=new Tea();
         drink.drink();
         Drink drink1=new Coffee();
         drink1.drink();
+        *//*这是基于接口实现多态*//*
+        Person p1=new Run();
+        Person p2=new Sleep();
+        p1.action();
+        p2.action();
+        *//*还有一种基于本类的方法重载实现多态*//*
     }*/
 
 
