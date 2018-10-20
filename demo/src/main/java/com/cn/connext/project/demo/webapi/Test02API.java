@@ -1,6 +1,9 @@
 package com.cn.connext.project.demo.webapi;
 
 import com.cn.connext.project.demo.entity.Outer;
+import com.cn.connext.project.demo.entity.Person;
+import com.cn.connext.project.demo.entity.Run;
+import com.cn.connext.project.demo.entity.Sleep;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -147,8 +150,12 @@ public class Test02API {
         inside_two.test();
     }*/
 
-    public static void main(String[] args) {
-
-    }
+    /*基于接口实现多态*/
+    /*public static void main(String[] args) {
+        Person p1=new Run();
+        Person p2=new Sleep();
+        p1.action();
+        p2.action();
+    }*/
 
 }

@@ -41,4 +41,8 @@ public class MediaService {
     public List<MediaDTO> findAllToDTO(){
         return mediaRepository.findAllToDTO();
     }
+
+    public Media create(Media media){
+        return mediaRepository.save(media);
+    }
 }

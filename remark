@@ -66,6 +66,7 @@ knowledge:
     5.自定义注解，枚举。
     6.JPA查询转换DTO。
     7.JPA通过EntityManager接口实现增删改查
+    8.事务管理
 
 demo:
     1.简单的学习测试服务。
@@ -77,6 +78,7 @@ demo:
     7.存储过程的实现
     8.SpringMVC异步实现:DeferredResult(MediaAPI) 学习参考:im服务ChatAPI
     9.StartTimer定时任务的实现。
+    10.回调函数；时间格式化；通过配置文件配置属性值；多态；内部类实现；对时间的处理；代理模式的理解
 
     待研究：
     一.
